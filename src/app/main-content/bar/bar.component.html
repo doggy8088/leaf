@@ -1,0 +1,178 @@
+<nz-content>
+  <div style="line-height: 30px;margin: 10px;border-left: 2px #ccc solid;border-top: 2px #ccc solid">
+    <div style="margin: 20px;">
+      <div style="margin: 5px;">
+      <span style="font-size: 20px;font-weight: 400;">
+        <h2>{{tittle}}</h2>
+      </span>
+      </div>
+      <div>
+        <span>通过条形图去显示数据内容。</span>
+      </div>
+      <div style="margin: 20px 0">
+        <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
+          <div class="tittle">
+            <h3><span></span>条形图基础设置</h3>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>获取数据的URL字段</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input  [nzSize]="'default'" nzType="text" formControlName="barUrlName" name="barUrlName"
+                         nzPlaceHolder="UrlName">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>获取数据URL地址</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="barUrl" name="barUrl"
+                          nzPlaceHolder="URL地址">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>图表距左侧距离</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input  [nzSize]="'default'" nzType="text" formControlName="gridLeft" name="gridLeft">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>图标距底部距离</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="gridBottom" name="gridBottom">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>x轴数据类型</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-select formControlName="xAxisType" [(ngModel)]="_xAxisType" nzPlaceHolder="value或category">
+                <nz-option nzValue="value" nzLabel="value"></nz-option>
+                <nz-option nzValue="category" nzLabel="category"></nz-option>
+              </nz-select>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>y轴数据类型</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-select formControlName="yAxisType" [(ngModel)]="_yAxisType" nzPlaceHolder="value或category">
+                  <nz-option nzValue="value" nzLabel="value"></nz-option>
+                  <nz-option nzValue="category" nzLabel="category"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>图表展示形式(line/bar)</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-select formControlName="seriesType" [ngModel]="_seriesType"  nzPlaceHolder="bar或line">
+                <nz-option nzValue="bar" nzLabel="bar"></nz-option>
+                <nz-option nzValue="line" nzLabel="line"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+        </form>
+        <div class="tittle">
+          <h3><span></span>代码生成</h3>
+        </div>
+        <div>
+          <h4>HTML文件代码</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            &lt;div echarts [options]="option"&gt;&lt;/div&gt;
+          </div>
+        </div>
+        <div>
+          <h4>TS文件代码</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            <div>/***成员变量***/</div>
+            <div>public option;</div>
+            <div>private <span>{{validateForm.get('barUrlName').value}}</span> = <span>'{{validateForm.get('barUrl').value}}'</span>;
+            </div>
+            <div>private _gridLeft = '<span>{{validateForm.get('gridLeft').value}}</span>';</div>
+            <div>private _gridBottom = '<span>{{validateForm.get('gridBottom').value}}</span>';</div>
+            <div>public _xAxisType = '<span>{{validateForm.get('xAxisType').value}}</span>';</div>
+            <div>public _yAxisType = '<span>{{validateForm.get('yAxisType').value}}</span></div>
+            <div>public _seriesType = '<span>{{validateForm.get('seriesType').value}}</span>';</div>
+            <div>private _legendData = ['2011年', '2012年']; </div>
+            <div>public _seriesDate = [];</div>
+            <div>public _yAxisData = ['巴西', '印尼', '美国', '印度', '中国', '世界人口(万)'];</div>
+            <div>/***函数***/</div>
+            <div>getOptionDate() {{'{'}}<br/>
+              this.httpService._get(this.{{validateForm.get('barUrlName').value}}).subscribe(res=>{{'{'}}<br/>
+              if(res) {{'{'}}<br/>
+              res.ydata = this._yAxisData;<br/>
+              res = this.option.series;<br/>
+              const date = res;<br/>
+              date.forEach(d=>{{'{'}}<br/>
+              const obj = {{'{'}}<br/>
+              name: d.name,<br/>
+              data: d.data,<br/>
+              type: d.type,<br/>
+              {{'}'}};<br/>
+              this._seriesDate.push(obj);<br/>
+              {{'}'}})<br/>
+              this.getOption();<br/>
+              {{'}'}}<br/>
+              getOption() {{'{'}}<br/>
+              this.option = {{'{'}}<br/>
+              tooltip: {{'{'}}<br/>
+              trigger: 'axis'<br/>
+              axisPointer: {{'{'}}<br/>
+              type: 'shadow'<br/>
+              {{'}'}}<br/>
+              {{'}'}},<br/>
+              legend: {{'{'}}<br/>
+              data: this._legendData<br/>
+              {{'}'}},<br/>
+              grid: {{'{'}}<br/>
+              left: this._gridLeft,<br/>
+              right: 4%,<br/>
+              bottom: this._gridBottom,<br/>
+              containLabel: true<br/>
+              {{'}'}},<br/>
+              xAxis: {{'{'}}<br/>
+              type: this._xAxisType,<br/>
+              boundaryGap: [0, 0.01]<br/>
+              {{'}'}},<br/>
+              yAxis: {{'{'}}<br/>
+              type: this._yAxisType,<br/>
+              data: this._yAxisData<br/>
+              {{'}'}},<br/>
+              series: this.seriesDate
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h4>Demo演示</h4>
+    </div>
+    <div style="border: #48c2a5 1px solid">
+      <div style="margin-left: 15px;">
+        <div style="font-size: 15px;" (click)="handClick()"><span>
+              <i class="fa fa-paint-brush" aria-hidden="true"></i>更改颜色</span>
+        </div>
+        <div echarts [options]="option"></div>
+      </div>
+    </div>
+  </div>
+
+</nz-content>

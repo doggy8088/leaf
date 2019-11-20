@@ -1,0 +1,588 @@
+<nz-content>
+  <div style="line-height: 30px;margin: 10px;border-left: 2px #ccc solid;border-top: 2px #ccc solid">
+    <div style="margin: 20px;">
+      <div style="margin: 5px;">
+      <span style="font-size: 20px;font-weight: 400;">
+        <h2>
+          {{tittle}}
+        </h2>
+      </span>
+      </div>
+      <div>
+        <span>展示行列数据。</span>
+      </div>
+      <div style="margin: 20px 0">
+        <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
+          <div class="tittle">
+            <h3><span></span>表格基础设置</h3>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>表格获取数据的字段</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="tableUrlName" name="tableUrlName"
+                        nzPlaceHolder="获取数据的Url的字段名称">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>获取数据Url地址</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="tableUrl" name="tableUrl"
+                          nzPlaceHolder="后端接口地址">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>存储数据数组名称</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="tableDataList" name="tableDataList"
+                        nzPlaceHolder="存储数据的数据的名称">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>表格是否显示分页信息</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-select
+                  [nzPlaceHolder]="'表格是否显示分页信息'"
+                  [(ngModel)]="tableShowPageInfo"
+                  formControlName='tableShowPageInfo'>
+                  <nz-option nzValue="0" nzLabel="显示"></nz-option>
+                  <nz-option nzValue="1" nzLabel="不显示"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>表格是否显示搜索框</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-select
+                [nzPlaceHolder]="'表格是否显示搜索框'"
+                [(ngModel)]="tableSearchInput"
+                formControlName='tableSearchInput'>
+                <nz-option nzValue="0" nzLabel="显示"></nz-option>
+                <nz-option nzValue="1" nzLabel="不显示"></nz-option>
+              </nz-select>
+            </div>
+            <div nz-form-item *ngIf="validateForm.get('tableSearchInput').value==='0'">
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>搜索框的placeholder</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="tableInputSearchPlaceHolder"
+                          name="tableInputSearchPlaceHolder" nzPlaceHolder="搜索框的上面显示的placeholder">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>表格是否使用复选框</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-select
+                [nzPlaceHolder]="'表格是否使用复选框'"
+                [(ngModel)]="tableCheckBoxs"
+                formControlName='tableCheckBoxs'>
+                <nz-option nzValue="0" nzLabel="使用"></nz-option>
+                <nz-option nzValue="1" nzLabel="不使用"></nz-option>
+              </nz-select>
+            </div>
+            <div nz-form-item *ngIf="validateForm.get('tableCheckBoxs').value==='0'">
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>复选框按钮的文字</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="tableCheckBoxName"
+                          name="tableCheckBoxName" nzPlaceHolder="复选框按钮上面显示的文字">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div class="tittle">
+            <h3><span></span>表格进阶设置</h3>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>表头信息(用'|'隔开)</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="tableSchemaTittleInfo"
+                        name="tableSchemaTittleInfo" nzPlaceHolder="请输入表头信息，并用'|'隔开">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>表头对应的字段信息(用'|'隔开)</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="tableSchemaParamInfo"
+                          name="tableSchemaParamInfo" nzPlaceHolder="请输入表头对应的字段信息(用'|'隔开)">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>选择字段中有超级链接</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8">
+              <nz-select
+                [nzMode]="'tag'"
+                [nzPlaceHolder]="'请选择那个字段需要超链接'"
+                [(ngModel)]="tableShowHyperLink"
+                [nzNotFoundContent]="'无数据'"
+                formControlName='tableShowHyperLink'>
+                <nz-option *ngFor="let option of tittleParam"
+                           [nzLabel]="option"
+                           [nzValue]="option">
+                </nz-option>
+              </nz-select>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>表中超链接操作的函数</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="tableHyperLinkFunction"
+                          name="tableHyperLinkFunction" nzPlaceHolder="点击超链接所进行的操作的函数名">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>所要进行的操作名称(用'|'隔开)</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="tableActionTittle" name="tableActionTittle"
+                        nzPlaceHolder="所要进行的操作名称(用'|'隔开)">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>所要进行的操作的方法名(用'|'隔开)</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="tableActionFuntion"
+                          name="tableActionFuntion" nzPlaceHolder="所要进行的操作名称(用'|'隔开)">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+        <div>
+          <h4>Html文件</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          &lt;div class="main"&gt;<br/>
+          <div
+            *ngIf="validateForm.get('tableCheckBoxs').value==='0'||validateForm.get('tableSearchInput').value==='0'">
+            &lt;div class="toolsbar"&gt;<br/>
+            <div *ngIf="validateForm.get('tableCheckBoxs').value==='0'">
+              &lt;button nz-button [nzType]="'default'" *ngIf="selectBtn" [class.disabledBtn]="_disabledButton"<br/>
+              [disabled]="_disabledButton"&gt;<span>{{validateForm.get('tableCheckBoxName').value}}</span><br/>
+              &lt;/button&gt;<br/>
+            </div>
+            <div *ngIf="validateForm.get('tableSearchInput').value==='0'">
+              &lt;div class='search'&gt;<br/>
+              &lt;nz-input #searchSource<br/>
+              name="search"<br/>
+              [nzPlaceHolder]="'<span>{{validateForm.get('tableInputSearchPlaceHolder').value}}</span>'"<br/>
+              [nzSize]="'large'"<br/>
+              [nzType]="'search'"<br/>
+              [ngModel]="param"<br/>
+              (keyup)='search(searchSource.nzValue)'&gt;&lt;/nz-input&gt;<br/>
+              &lt;/div&gt;<br/>
+            </div>
+            &lt;/div&gt;<br/>
+          </div>
+
+          &lt;nz-table #nzTable<br/>
+          [nzAjaxData]="<span>{{validateForm.get('tableDataList').value}}</span>"<br/>
+          nzShowSizeChanger<br/>
+          [nzIsPagination]="{{showPageInfo}}"<br/>
+          [nzLoading]="loadingTable"<br/>
+          [(nzTotal)]="total"<br/>
+          [(nzPageIndex)]="current"<br/>
+          (nzPageIndexChange)="refreshData()"<br/>
+          [(nzPageSize)]="pageSize"<br/>
+          (nzPageSizeChange)="refreshData(true)"<br/>
+          [nzShowQuickJumper]="true"<br/>
+          [nzShowTotal]="true"<br/>
+          [nzCustomNoResult]="_nzCustomNoResult"&gt;<br/>
+          &lt;thead nz-thead&gt;<br/>
+          &lt;tr&gt;<br/>
+          <div *ngIf="validateForm.get('tableCheckBoxs').value==='0'">
+            &lt;th nz-th *ngIf="selectBtn" [nzCheckbox]="true"&gt;<br/>
+            &lt;label nz-checkbox<br/>
+            [(ngModel)]="_allChecked"<br/>
+            [nzIndeterminate]="_indeterminate"<br/>
+            (ngModelChange)="_checkAll($event)"&gt;<br/>
+            &lt;/label&gt;<br/>
+            &lt;/th&gt;<br/>
+          </div>
+          &lt;th nz-th *ngFor="let param of schema"&gt;<br/>
+          &lt;span class="nz-th"&gt;{{'{'}}{{'{'}}param.name{{'}'}}{{'}'}}&lt;/span&gt;<br/>
+          &lt;nz-table-sort<br/>
+          (nzValueChange)="sort(param.key.split('.')[param.key.split('.').length-1],$event)"&gt;&lt;/nz-table-sort&gt;<br/>
+          &lt;/th&gt;<br/>
+          &lt;th nz-th&gt;<br/>
+          &lt;span class="nz-th"&gt;{{'{'}}{{'{'}}actionTittleName{{'}'}}{{'}'}}&lt;/span&gt;<br/>
+          &lt;/th&gt;<br/>
+          &lt;/tr&gt;<br/>
+          &lt;/thead&gt;<br/>
+          &lt;tbody nz-tbody&gt;<br/>
+          &lt;tr nz-tbody-tr *ngFor="let data of nzTable.data"&gt;<br/>
+          <div *ngIf="validateForm.get('tableCheckBoxs').value==='0'">
+            &lt;td *ngIf="selectBtn" nz-td [nzCheckbox]="true"&gt;<br/>
+            &lt;label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="_refreshStatus($event)"&gt;<br/>
+            &lt;/label&gt;<br/>
+            &lt;/td&gt;<br/>
+          </div>
+          <div *ngFor="let param of tittleParam">
+            <div *ngIf="validateForm.get('tableShowHyperLink').value===param">
+              &lt;td nz-td&gt; &lt;a (click)="<span>{{validateForm.get('tableHyperLinkFunction').value}}</span>()"&gt;{{'{'}}{{'{'}}data.{{param}}{{'}'}}{{'}'}}&lt;/a&gt;&lt;/td&gt;<br/>
+            </div>
+            <div *ngIf="validateForm.get('tableShowHyperLink').value!==param">
+              &lt;td nz-td&gt;{{'{'}}{{'{'}}data.{{param}}{{'}'}}{{'}'}}&lt;/td&gt;<br/>
+            </div>
+          </div>
+          &lt;td nz-td&gt;<br/>
+          &lt;div *ngFor="let act of actions"&gt;<br/>
+          <div *ngFor="let act of tableActionLittle;let i = index">
+            &lt;button (click)='<span>{{tableActionFunctionName[i]}}</span>()'&gt;{{'{'}}{{'{'}}act{{'}'}}{{'}'}}&lt;/button&gt;
+          </div>
+          <br/>
+          &lt;/div&gt;<br/>
+          &lt;/td&gt;<br/>
+          &lt;/tr&gt;<br/>
+          &lt;/tbody&gt;<br/>
+          &lt;/nz-table&gt;<br/>
+          &lt;/div&gt;<br/>
+        </div>
+
+        <div>
+          <h4>TS文件</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          /***成员变量***/<br/>
+          public schema = [];<br/>
+          public actionTittleName = '操作';<br/>
+          public actions = [];<br/>
+          public _allChecked = false; // 是否全选<br/>
+          public _indeterminate = false; // 至少有一个选项<br/>
+          public selectBtn = false;<br/>
+          public _disabledButton = true;<br/>
+          public searchDisabled = false;<br/>
+
+          public showPageInfo = true;<br/>
+          public pageSize: number;<br/>
+          public current = 1;<br/>
+          public loadingTable = false;<br/>
+          public _nzCustomNoResult = true;<br/>
+          public total: number;<br/>
+          public searchParams: string;<br/>
+          public searchSubject;<br/>
+
+
+          public <span>{{validateForm.get('tableUrlName').value}}</span> =
+          '<span>{{validateForm.get('tableUrl').value}}</span>';<br/>
+          public param: string;<br/>
+          public sortName = null;<br/>
+          public sortValue = null;<br/>
+          public <span>{{validateForm.get('tableDataList').value}}</span>=[];<br/>  // 存放table数据的List
+
+
+          /***函数***/<br/>
+          constructor(private tableService: TableService) {{'{'}} {{'}'}}
+          ngOnInit() {{'{'}}
+          this.pageSize = 10;
+          this.total = this.dataSrcs.length;
+          this.setSchema();
+          this.setActions();
+          {{'}'}}
+
+          sort(sortName, value) {{'{'}} //排序函数<br/>
+          this.sortName = sortName;<br/>
+          this.sortValue = value;<br/>
+          this.Search();<br/>
+          {{'}'}}<br/>
+
+
+          Search() {{'{'}}<br/>
+          this.dataSrcs = [...this.dataSrcs.sort((a, b) => {{'{'}}<br/>
+          if (a[this.sortName] > b[this.sortName]) {{'{'}}<br/>
+          return (this.sortValue === 'ascend') ? 1 : -1;<br/>
+          {{'}'}} else if (a[this.sortName] < b[this.sortName]) {{'{'}}<br/>
+          return (this.sortValue === 'ascend') ? -1 : 1;<br/>
+          {{'}'}} else {{'{'}}<br/>
+          return 0;<br/>
+          {{'}'}}<br/>
+          {{'}'}})];<br/>
+          {{'}'}}<br/>
+
+          search(term: string): void {{'{'}}<br/>
+          term = term || '';<br/>
+          this.tableService.searchEvent.next(term);<br/>
+          this.searchSubject = this.tableService.searchEvent<br/>
+          .debounceTime(300)<br/>
+          .distinctUntilChanged()<br/>
+          .subscribe(<br/>
+          params => {{'{'}}<br/>
+          if (params.constructor.name === 'Boolean') {{'{'}}<br/>
+          this.refreshData();<br/>
+          {{'}'}} else {{'{'}}<br/>
+          this.searchParams = params;<br/>
+          this.refreshData(true);<br/>
+          {{'}'}}<br/>
+          {{'}'}}<br/>
+          );<br/>
+          {{'}'}}<br/>
+
+
+          setActions() {{'{'}}<br/>
+          this.actions = [<span *ngFor="let actTittlt of tableActionLittle">'{{actTittlt}}',</span>]<br/>
+          {{'}'}}<br/>
+
+
+          //Action 函数<br/>
+          <div *ngFor="let actFunctionName of tableActionFunctionName"><br/>
+            <span>{{actFunctionName}} () {{'{'}} </span><br/>
+            //输入对应函数的内容<br/>
+            {{'}'}}<br/>
+          </div>
+          <br/>
+
+          setSchema() {{'{'}}<br/>
+          this.schema = [<br/>
+          <div *ngFor="let schemaTittle of tittleList;let i = index"><br/>
+            {{'{'}}<br/>
+            key: <span>'{{tittleParam[i]}}',</span>,<br/>
+            name:<span>'{{schemaTittle}}',</span><br/>
+            {{'}'}},<br/>
+          </div>
+          <br/>
+          ]<br/>
+          {{'}'}}<br/>
+
+
+          _checkAll(value) {{'{'}} //多选框的全选<br/>
+          if (value) {{'{'}}<br/>
+          this.dataSrcs.forEach(data => data.checked = true);<br/>
+          {{'}'}} else {{'{'}}<br/>
+          this.dataSrcs.forEach(data => data.checked = false);<br/>
+          {{'}'}}<br/>
+          this._refreshStatus();<br/>
+          {{'}'}}<br/>
+
+
+          _refreshStatus() {{'{'}} //多选框的可选<br/>
+          if (this.dataSrcs.length > 0) {{'{'}}<br/>
+          const allChecked = this.dataSrcs.every(value => value.checked === true);<br/>
+          const allUnChecked = this.dataSrcs.every(value => !value.checked);<br/>
+          this._allChecked = allChecked;<br/>
+          this._indeterminate = (!allChecked) && (!allUnChecked);<br/>
+          this._disabledButton = !this.dataSrcs.some(value => value.checked);<br/>
+          {{'}'}}<br/>
+          {{'}'}}<br/>
+
+
+          refreshData(reset = false): void {{'{'}} //当前页码变化回调<br/>
+          // 每页数量变化回调 reset=true<br/>
+          if (reset) {{'{'}}<br/>
+          this.current = 1;<br/>
+          {{'}'}}<br/>
+          // this.loadingTable = true;<br/>
+          this._nzCustomNoResult = true;<br/>
+          const pageInfo = {{'{'}}<br/>
+          curpage: this.current,<br/>
+          pagesize: this.pageSize,<br/>
+          searchParams: this.searchParams<br/>
+          {{'}'}};<br/>
+          this.tableService.setPageInfo(pageInfo);<br/>
+          if (this.url) {{'{'}}<br/>
+          this.tableService._getDatas(this.url, pageInfo)<br/>
+          .subscribe(respose => {{'{'}}<br/>
+          if (respose) {{'{'}}<br/>
+          // this.loadingTable = false;<br/>
+          this._nzCustomNoResult = false;<br/>
+          this.total = respose.result.totalcount;<br/>
+          this.dataSrcs = respose.result.resultlist;<br/>
+          {{'}'}}<br/>
+          {{'}'}});<br/>
+          {{'}'}}<br/>
+          {{'}'}}<br/>
+        </div>
+
+
+        <div>
+          <h4>TS文件-Service</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          /***导入的包***/<br/>
+          import {{'{'}}Injectable{{'}'}} from '@angular/core';<br/>
+          import {{'{'}}EventEmitter{{'}'}} from '@angular/core';<br/>
+          import {{'{'}}Http, Response{{'}'}} from "@angular/http";<br/>
+          import {{'{'}}Observable{{'}'}} from 'rxjs/Rx';<br/>
+          import {{'{'}}NzNotificationService{{'}'}} from 'ng-zorro-antd';<br/>
+          /***文件主体***/<br/>
+          searchEvent: EventEmitter&lt;any&gt; = new EventEmitter(true);<br/>
+          private pageInfos: {{'{'}} curpage: number, pagesize: number, sortfield: string, sortorder: string,<br/>
+          searchParams: string, roleType: number {{'}'}};<br/>
+          private preUrl: string;<br/>
+
+          constructor(private http: Http, private _notification: NzNotificationService) {{'{'}}<br/>
+          {{'}'}}<br/>
+
+
+          _getDatas(url, pageInfo) {{'{'}}<br/>
+          const params = new URLSearchParams();<br/>
+          const pageInfoKey = ['curpage', 'pagesize', 'sortfield', 'sortorder'];<br/>
+          if (!pageInfo.sortorder) {{'{'}}<br/>
+          pageInfo.sortfield = undefined;<br/>
+          {{'}'}}<br/>
+          pageInfoKey.forEach(opt => {{'{'}}<br/>
+          if (pageInfo[opt]) {{'{'}}<br/>
+          params.append(opt, `${{'{'}}pageInfo[opt]{{'}'}}`);<br/>
+          {{'}'}}<br/>
+          {{'}'}});<br/>
+
+          if (pageInfo.searchParams) {{'{'}}<br/>
+          params.append('parameter', `${{'{'}}pageInfo.searchParams{{'}'}}`);<br/>
+          {{'}'}}<br/>
+
+          return this.http.get(`${{'{'}}url{{'}'}}`, {{'{'}}params: params{{'}'}})<br/>
+          .map((res: Response) => {{'{'}}<br/>
+          if (res.json().code === '0000') {{'{'}}<br/>
+          const result = res.json();<br/>
+          return result;<br/>
+          {{'}'}} else {{'{'}}<br/>
+          this.createNotification('error', res.json().message);<br/>
+          return null;<br/>
+          {{'}'}}<br/>
+          {{'}'}})<br/>
+          .catch((error: any) => Observable.throw(error || '错误'));<br/>
+          {{'}'}}<br/>
+
+          private createNotification = (type, message) => {{'{'}}<br/>
+          if (type === 'error') {{'{'}}<br/>
+          this._notification.error('失败', message);<br/>
+          {{'}'}} else {{'{'}}<br/>
+          this._notification.success('成功', message);<br/>
+          {{'}'}}<br/>
+          {{'}'}}<br/>
+
+          setPageInfo(opt) {{'{'}}<br/>
+          this.pageInfos = opt;<br/>
+          {{'}'}}<br/>
+
+          getPageInfo() {{'{'}}<br/>
+          return this.pageInfos;<br/>
+          {{'}'}}<br/>
+
+          setUrl(url) {{'{'}}<br/>
+          this.preUrl = url;<br/>
+          {{'}'}}<br/>
+
+          getUrl() {{'{'}}<br/>
+          return this.preUrl;<br/>
+          {{'}'}}<br/>
+        </div>
+
+
+        <div>
+          <h4>Demo</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div class="main">
+            <div class="toolsbar">
+              <button nz-button [nzType]="'default'" *ngIf="selectBtn" [class.disabledBtn]="_disabledButton"
+                      [disabled]="_disabledButton">{{validateForm.get('tableCheckBoxName').value}}
+              </button>
+              <div *ngIf="searchDisabled" class='search'>
+                <nz-input #searchSource
+                          name="search"
+                          [nzPlaceHolder]="validateForm.get('tableInputSearchPlaceHolder').value"
+                          [nzSize]="'large'"
+                          [nzType]="'search'"
+                          [ngModel]="param"
+                          (keyup)='search(searchSource.nzValue)'></nz-input>
+              </div>
+            </div>
+            <nz-table #nzTable
+                      [nzIsPagination]="showPageInfo"
+                      [nzAjaxData]="dataSrcs"
+                      nzShowSizeChanger
+                      [nzLoading]="loadingTable"
+                      [(nzTotal)]="total"
+                      [(nzPageIndex)]="current"
+                      (nzPageIndexChange)="refreshData()"
+                      [(nzPageSize)]="pageSize"
+                      (nzPageSizeChange)="refreshData(true)"
+                      [nzShowQuickJumper]="true"
+                      [nzShowTotal]="true"
+                      [nzCustomNoResult]="_nzCustomNoResult">
+              <thead nz-thead>
+              <tr>
+
+                <th nz-th *ngIf="selectBtn" [nzCheckbox]="true">
+                  <label nz-checkbox
+                         [(ngModel)]="_allChecked"
+                         [nzIndeterminate]="_indeterminate"
+                         (ngModelChange)="_checkAll($event)">
+                  </label>
+                </th>
+
+                <th nz-th *ngFor="let param of schema">
+                  <span class="nz-th">{{param.name}}</span>
+                  <nz-table-sort
+                    (nzValueChange)="sort(param.key.split('.')[param.key.split('.').length-1],$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                  <span class="nz-th">{{actionTittleName}}</span>
+                </th>
+              </tr>
+              </thead>
+              <tbody nz-tbody>
+              <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                <td *ngIf="selectBtn" nz-td [nzCheckbox]="true">
+                  <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="_refreshStatus($event)">
+                  </label>
+                </td>
+                <td nz-td>
+                  <a (click)="getAdd()">{{data.pipelineName}}</a>
+                </td>
+                <td nz-td>{{data.creatorUserAccount}}</td>
+                <td nz-td>{{data.pipelinestageNames}}</td>
+                <td nz-td>
+                  <button *ngFor="let act of actions">{{act}}</button>
+                </td>
+              </tr>
+              </tbody>
+            </nz-table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</nz-content>

@@ -1,0 +1,710 @@
+<nz-content xmlns="http://www.w3.org/1999/html">
+  <div style="line-height: 30px;margin: 10px;border-left: 2px #ccc solid;border-top: 2px #ccc solid">
+    <div style="margin: 20px;">
+      <div style="margin: 5px;">
+      <span style="font-size: 20px;font-weight: 400;">
+        <h2>
+          {{tittle}}
+        </h2>
+      </span>
+      </div>
+      <div>
+        <span>将做个节点进行移动，增加，删除。</span>
+      </div>
+      <div style="margin: 20px 0">
+        <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
+          <div class="tittle">
+            <h3><span></span>步骤卡片移动的演示代码</h3>
+          </div>
+        </form>
+
+
+        <div>
+          <h4>HTML文件</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            &lt;nz-content&gt;<br/>
+            &lt;h2 class='title'&gt;模版&lt;/h2&gt;<br/>
+            &lt;!--标题 end--&gt;<br/>
+
+            &lt;!--主体内容--&gt;<br/>
+            &lt;div class="main"&gt;<br/>
+            &lt;!--form表单--&gt;<br/>
+            &lt;form nz-form [formGroup]="validateForm"&gt;<br/>
+            &lt;!--添加步骤--&gt;<br/>
+            &lt;div&gt;<br/>
+            &lt;div nz-row [nzGutter]="18"&gt;<br/>
+            &lt;div nz-col class="gutter-row eploy-new-box-left" [nzSpan]="6"&gt;<br/>
+            &lt;!--侧边选项--&gt;<br/>
+            &lt;div class="gutter-box"&gt;<br/>
+            &lt;div class="but_box"&gt;<br/>
+            &lt;button (click)="stageChange('up')" class="up"&gt;&lt;i<br/>
+            class="anticon anticon-up"&gt;&lt;/i&gt;&lt;/button&gt;<br/>
+            &lt;button (click)="stageChange('down')" class="down"&gt;&lt;i<br/>
+            class="anticon anticon-down"&gt;&lt;/i&gt;&lt;/button&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div class="deploy-new-box-left-div" *ngFor="let param of fmModelStages;let i = index;"&gt;<br/>
+            &lt;h4&gt;步骤{{'{'}}{{'{'}}i+1{{'}'}}{{'}'}}&lt;/h4&gt;<br/>
+            &lt;div class="deploy-new-box-left-div-main" [class.extra-sparkle]="param.flag"<br/>
+            (click)="chooseStyle(i)"&gt;<br/>
+            &lt;nz-tooltip [nzTitle]="param.stageName" [nzPlacement]="'top'"&gt;<br/>
+            &lt;textarea nz-tooltip class="deploy-new-box-left-input" [(ngModel)]="param.stageName"<br/>
+            [ngModelOptions]="{{'{'}}standalone: true{{'}'}}" style="max-width: 100px"&gt;&lt;/textarea&gt;<br/>
+            &lt;span (click)="deleteStage(i)"&gt;&lt;i<br/>
+            class="anticon anticon-close-circle"&gt;&lt;/i&gt;&lt;/span&gt;<br/>
+            &lt;/nz-tooltip&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div class="addbtn"&gt;&lt;i class="anticon anticon-plus-circle" (click)="onAddStep()"&gt;&lt;/i&gt;&lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;!--left end--&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div formArrayName="Stages"&gt;<br/>
+            &lt;div nz-col class="gutter-row eploy-new-box-right" [nzSpan]="18"<br/>
+            *ngFor="let p of fmModelStages;let i = index; "&gt;<br/>
+            &lt;div class="gutter-box" [hidden]="!p.flag"&gt;<br/>
+
+            &lt;div nz-form-item nz-row&gt;<br/>
+            &lt;div nz-form-label nz-col [nzSpan]="3"&gt;<br/>
+            &lt;label&gt;Stpe{{'{'}}{{'{'}}i+1{{'}'}}{{'}'}}&lt;/label&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div nz-col [nzSpan]="10" nz-form-control&gt;<br/>
+            &lt;nz-input [nzType]="'text'" [nzDisabled]='_disabled' [(ngModel)]="p.stageName"<br/>
+            [ngModelOptions]="{{'{'}}standalone: true{{'}'}}"<br/>
+            [nzPlaceHolder]="'请输入'" [nzSize]="'large'"&gt;<br/>
+            &lt;/nz-input&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+
+            &lt;div nz-form-item nz-row&gt;<br/>
+            &lt;div nz-form-label nz-col [nzSpan]="3"&gt;<br/>
+            &lt;label&gt;任务执行&lt;/label&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div nz-form-control nz-col [nzSpan]="20"&gt;<br/>
+            &lt;div class="right-bg-box" *ngFor="let item of p.stageTaskList;let j=index"&gt;<br/>
+            &lt;div class="right-btn"&gt;<br/>
+            &lt;button style="border: white;" class="left" [disabled]="_disabled"<br/>
+            *ngIf="j===0?false:true"<br/>
+            (click)="taskChange('up',i,j)"&gt;&lt;i class="anticon anticon-up-circle"&gt;&lt;/i&gt;<br/>
+            &lt;/button&gt;<br/>
+            &lt;button style="border: white;" class="left" [disabled]="_disabled"<br/>
+            *ngIf="j===p.stageTaskList.length-1?false:true"<br/>
+            (click)="taskChange('down',i,j)"&gt;&lt;i class="anticon anticon-down-circle"&gt;&lt;/i&gt;<br/>
+            &lt;/button&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;span class="colse" (click)="colse(i,j)"&gt;&lt;i<br/>
+            class="anticon anticon-close"&gt;&lt;/i&gt;&lt;/span&gt;<br/>
+            &lt;div nz-row [nzGutter]="8"&gt;<br/>
+            &lt;div nz-col [nzSpan]="24"&gt;<br/>
+            &lt;div nz-row&gt;<br/>
+            &lt;div nz-form-label nz-col [nzSpan]="5"&gt;<br/>
+            &lt;label&gt;<br/>
+            Task{{'{'}}{{'{'}}j+1{{'}'}}{{'}'}}<br/>
+            &lt;/label&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div nz-form-control nz-col [nzSpan]="14"&gt;<br/>
+            &lt;nz-input [nzSize]="'large'" [nzDisabled]='_disabled'<br/>
+            [nzPlaceHolder]="'请输入'"<br/>
+            [(ngModel)]="item.taskName" [ngModelOptions]="{{'{'}}standalone: true{{'}'}}"&gt;<br/>
+
+            &lt;/nz-input&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div nz-row&gt;<br/>
+            &lt;div nz-form-label nz-col [nzSpan]="5"&gt;<br/>
+            &lt;label&gt;<br/>
+            任务状态<br/>
+            &lt;/label&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div nz-form-control nz-col [nzSpan]="14"&gt;<br/>
+            &lt;nz-input [nzSize]="'large'" [nzDisabled]='_disabled'<br/>
+            [nzPlaceHolder]="'请输入'"<br/>
+            [(ngModel)]="item.taskStatus" [ngModelOptions]="{{'{'}}standalone: true{{'}'}}"&gt;<br/>
+
+            &lt;/nz-input&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div nz-row&gt;<br/>
+            &lt;div nz-form-label nz-col [nzSpan]="5"&gt;<br/>
+            &lt;label&gt;<br/>
+            任务内容<br/>
+            &lt;/label&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div nz-form-control nz-col [nzSpan]="14"&gt;<br/>
+            &lt;nz-input [nzSize]="'large'" [nzDisabled]='_disabled'<br/>
+            [nzPlaceHolder]="'请输入'"<br/>
+            [(ngModel)]="item.taskContent"<br/>
+            [ngModelOptions]="{{'{'}}standalone: true{{'}'}}"&gt;<br/>
+
+            &lt;/nz-input&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;button nz-button class="new-btn" [hidden]='_disabled' (click)="addTask(i)"&gt;<br/>
+            新建任务<br/>
+            &lt;/button&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+
+
+            &lt;/form&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;!--主体内容 end--&gt;<br/>
+
+            &lt;/nz-content&gt;<br/>
+
+          </div>
+        </div>
+
+        <div>
+          <h4>TS文件</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+
+            /***成员变量***/<br/>
+            public _disabled = false;<br/>
+            //步骤<br/>
+            public fmModelStages = [];<br/>
+            public initTask = [{{'{'}}<br/>
+            taskName: null,<br/>
+            taskStatus: null,<br/>
+            taskContent: null,<br/>
+            taskNumber: 1<br/>
+            {{'}'}}];<br/>
+
+            public initStep = [{{'{'}}<br/>
+            stageName: null,<br/>
+            stageNumber: 1,<br/>
+            flag: true,<br/>
+            stageTaskList: this.initTask{{'}'}}];<br/>
+
+            constructor(private fb: FormBuilder,<br/>
+            private model: DeploynewModel) {{'{'}}<br/>
+            this.validateForm = this.fb.group({{'{'}}<br/>
+            Stages: new FormArray([])<br/>
+            {{'}'}});<br/>
+            {{'}'}}<br/>
+
+            ngOnInit() {{'{'}}<br/>
+            this.init_data();<br/>
+            this.initModel();<br/>
+            {{'}'}}<br/>
+
+            init_data() {{'{'}}<br/>
+            this.model.Stages = [<br/>
+            new Stage()<br/>
+            ];<br/>
+            {{'}'}}<br/>
+
+            // 选择步骤<br/>
+            chooseStyle(value) {{'{'}}<br/>
+            this.model.Stages.forEach((data, i) => {{'{'}}<br/>
+            if (value === i) {{'{'}}<br/>
+            data.flag = true;<br/>
+            {{'}'}} else {{'{'}}<br/>
+            data.flag = false;<br/>
+            {{'}'}}<br/>
+            {{'}'}})<br/>
+            {{'}'}}<br/>
+
+            //删除步骤<br/>
+            deleteStage(i) {{'{'}}<br/>
+            this.model.Stages.splice(i, 1);<br/>
+            if (i - 1 === 0 || i - 1 > 0) {{'{'}}<br/>
+            this.model.Stages[i - 1].flag = true;<br/>
+            {{'}'}} else {{'{'}}<br/>
+            return;<br/>
+            {{'}'}}<br/>
+            this.createModel();<br/>
+            {{'}'}}<br/>
+
+            // 删除任务<br/>
+            colse(num1, num2) {{'{'}}<br/>
+            this.model.Stages[num1].stageTaskList.splice(num2, 1);<br/>
+            this.createModel();<br/>
+            {{'}'}}<br/>
+
+            // 增加步骤<br/>
+            onAddStep() {{'{'}}<br/>
+            this.model.Stages.forEach((data, i) => {{'{'}}<br/>
+            data.flag = false;<br/>
+            {{'}'}});<br/>
+
+            let index = this.model.Stages.length - 1;<br/>
+
+            const oneTask = {{'{'}}<br/>
+            taskName: null,<br/>
+            taskStatus: null,<br/>
+            taskContent: null,<br/>
+            taskNumber: 1<br/>
+            {{'}'}};<br/>
+
+            const oneStep = {{'{'}}<br/>
+            stageName: null,<br/>
+            stageNumber: index + 1,<br/>
+            flag: true,<br/>
+            stageTaskList: []<br/>
+            {{'}'}};<br/>
+
+            oneStep.stageTaskList.push(oneTask);<br/>
+            this.model.Stages.push(oneStep);<br/>
+            this.createModel();<br/>
+
+            {{'}'}}<br/>
+
+            // 添加任务<br/>
+            addTask(index) {{'{'}}<br/>
+            this.model.Stages.forEach((data, i) => {{'{'}}<br/>
+            data.flag = false;<br/>
+            if (index === i) {{'{'}}<br/>
+            data.flag = true;<br/>
+            let num = data.stageTaskList.length - 1;<br/>
+
+            const oneTask = new Task();<br/>
+            oneTask.taskName = null;<br/>
+            oneTask.taskStatus = null;<br/>
+            oneTask.taskContent = null;<br/>
+            oneTask.taskNumber = num + 1;<br/>
+            data.stageTaskList.push(oneTask);<br/>
+            {{'}'}}<br/>
+            {{'}'}});<br/>
+            this.createModel();<br/>
+            {{'}'}}<br/>
+
+            // 步骤换位<br/>
+            stageChange(value) {{'{'}}<br/>
+            let num;<br/>
+            this.model.Stages.forEach((data, i) => {{'{'}}<br/>
+            if (data.flag === true) {{'{'}}<br/>
+            num = i;<br/>
+            {{'}'}}<br/>
+            {{'}'}});<br/>
+
+            if (value === 'up') {{'{'}}<br/>
+            let tem = this.model.Stages[num];<br/>
+            this.model.Stages[num] = this.model.Stages[num - 1];<br/>
+            this.model.Stages[num - 1] = tem;<br/>
+            {{'}'}} else {{'{'}}<br/>
+            let tmp = this.model.Stages[num];<br/>
+            this.model.Stages[num] = this.model.Stages[num + 1];<br/>
+            this.model.Stages[num + 1] = tmp;<br/>
+            {{'}'}}<br/>
+            this.createModel();<br/>
+            {{'}'}}<br/>
+
+            // 任务换位<br/>
+            taskChange(value, num1, num2) {{'{'}}<br/>
+            if (value === 'up') {{'{'}}<br/>
+            let tem = this.model.Stages[num1].stageTaskList[num2];<br/>
+            this.model.Stages[num1].stageTaskList[num2] = this.model.Stages[num1].stageTaskList[num2 - 1];<br/>
+            this.model.Stages[num1].stageTaskList[num2 - 1] = tem;<br/>
+            {{'}'}} else {{'{'}}<br/>
+            let tmp = this.model.Stages[num1].stageTaskList[num2];<br/>
+            this.model.Stages[num1].stageTaskList[num2] = this.model.Stages[num1].stageTaskList[num2 + 1];<br/>
+            this.model.Stages[num1].stageTaskList[num2 + 1] = tmp;<br/>
+            {{'}'}}<br/>
+            this.createModel();<br/>
+            {{'}'}}<br/>
+
+            initModel() {{'{'}}<br/>
+            const objectFGs = [];<br/>
+            const stepList = [];<br/>
+            this.initStep.forEach((data, num) => {{'{'}}<br/>
+            const list = [];<br/>
+            data.stageTaskList.forEach((p, i) => {{'{'}}<br/>
+            // 任务<br/>
+            const taskObj = new Task();<br/>
+            taskObj.taskName = p.taskName;<br/>
+            taskObj.taskStatus = p.taskStatus;<br/>
+            taskObj.taskContent = p.taskContent;<br/>
+            taskObj.taskNumber = i + 1;<br/>
+            list.push(taskObj);<br/>
+
+            {{'}'}});<br/>
+            const obj = new Stage();<br/>
+            obj.stageName = data.stageName;<br/>
+            obj.stageNumber = num + 1;<br/>
+            obj.flag = data.flag;<br/>
+            obj.stageTaskList = list;<br/>
+            stepList.push(obj);<br/>
+            {{'}'}});<br/>
+
+            this.model.Stages = stepList;<br/>
+            this.model.Stages.map((params, index) => {{'{'}}<br/>
+            const Stages = {{'{'}}<br/>
+            stageName: params.stageName,<br/>
+            stageNumber: index + 1,<br/>
+            stageTaskList: params.stageTaskList<br/>
+            {{'}'}};<br/>
+            objectFGs.push(Stages);<br/>
+            {{'}'}});<br/>
+
+            const objectFormArray = this.fb.array(objectFGs);<br/>
+            this.validateForm.setControl('Stages', objectFormArray);<br/>
+            this.validateForm.patchValue({{'{'}}Stages: this.model.Stages{{'}'}});<br/>
+
+            this.fmModelStages = this.model.Stages;<br/>
+            console.log(this.model.Stages);<br/>
+            {{'}'}}<br/>
+
+            createModel() {{'{'}}<br/>
+            const objectFGs = [];<br/>
+            const stepList = [];<br/>
+            this.model.Stages.forEach((data, num) => {{'{'}}<br/>
+            const list = [];<br/>
+            data.stageTaskList.forEach((p, i) => {{'{'}}<br/>
+            // 任务<br/>
+            const taskObj = new Task();<br/>
+            taskObj.taskName = p.taskName;<br/>
+            taskObj.taskStatus = p.taskStatus;<br/>
+            taskObj.taskContent = p.taskContent;<br/>
+            taskObj.taskNumber = i + 1;<br/>
+            list.push(taskObj);<br/>
+
+            {{'}'}});<br/>
+            const obj = new Stage();<br/>
+            obj.stageName = data.stageName;<br/>
+            obj.stageNumber = num + 1;<br/>
+            obj.flag = data.flag;<br/>
+            obj.stageTaskList = list;<br/>
+            stepList.push(obj);<br/>
+            {{'}'}});<br/>
+
+            this.model.Stages = stepList;<br/>
+            this.model.Stages.map((params, index) => {{'{'}}<br/>
+            const Stages = {{'{'}}<br/>
+            stageName: params.stageName,<br/>
+            stageNumber: index + 1,<br/>
+            stageTaskList: params.stageTaskList<br/>
+            {{'}'}};<br/>
+            objectFGs.push(Stages);<br/>
+            {{'}'}});<br/>
+
+            const objectFormArray = this.fb.array(objectFGs);<br/>
+            this.validateForm.setControl('Stages', objectFormArray);<br/>
+            this.validateForm.patchValue({{'{'}}Stages: this.model.Stages{{'}'}});<br/>
+
+            this.fmModelStages = this.model.Stages;<br/>
+            {{'}'}}<br/>
+
+          </div>
+        </div>
+
+
+        <div>
+          <h4>Model</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            import {{'{'}}Injectable{{'}'}} from "@angular/core";<br/>
+
+
+            export class Task{{'{'}}<br/>
+            taskName:string;<br/>
+            taskStatus:any;<br/>
+            taskContent:string;<br/>
+            taskNumber:number;<br/>
+            {{'}'}}<br/>
+
+            export class Stage{{'{'}}<br/>
+            stageName:string;<br/>
+            stageNumber:number;<br/>
+            flag:boolean;<br/>
+            stageTaskList:Task[];<br/>
+            {{'}'}}<br/>
+
+            @Injectable()<br/>
+            export class DeploynewModel {{'{'}}<br/>
+            public Stages: Stage[];<br/>
+            {{'}'}}<br/>
+
+
+          </div>
+        </div>
+
+
+        <div>
+          <h4>Less文件</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+
+            nz-breadcrumb-item {{'{'}}<br/>
+            color: rgba(0, 0, 0, 0.4);<br/>
+
+            a {{'{'}}<br/>
+            color: rgba(0, 0, 0, 0.4);<br/>
+            {{'}'}}<br/>
+            {{'}'}}<br/>
+
+            // 步骤<br/>
+
+            .stage{{'{'}}<br/>
+            margin-top: 30px;<br/>
+            {{'}'}}<br/>
+            .gutter-box{{'{'}}<br/>
+            padding: 5px 10px;<br/>
+            border: 1px dashed #dcdcdc;<br/>
+            {{'}'}}<br/>
+
+            .but_box {{'{'}}<br/>
+            width: 42px;<br/>
+            margin-top: 30%;<br/>
+            float: right;<br/>
+            button {{'{'}}<br/>
+            width: 40px;<br/>
+            margin-top: 5px;<br/>
+            background: #fff;<br/>
+            color: #48c2a5;<br/>
+            border: 1px solid #48c2a5;<br/>
+            border-radius: 4px;<br/>
+            height: 28px<br/>
+            {{'}'}}<br/>
+            left {{'{'}}<br/>
+            display: block;<br/>
+            {{'}'}}<br/>
+
+            {{'}'}}<br/>
+
+            .deploy-new-box-left-div {{'{'}}<br/>
+            margin-top: 14px;<br/>
+            h4 {{'{'}}<br/>
+            margin-bottom: 8px;<br/>
+            {{'}'}}<br/>
+
+            .deploy-new-box-left-div-main {{'{'}}<br/>
+            margin-top: 10px;<br/>
+            border: 1px solid #dcdcdc;<br/>
+            border-radius: 3px;<br/>
+            width: 180px;<br/>
+            text-align: center;<br/>
+            font-size: 14px;<br/>
+            height: 80px;<br/>
+            position: relative;<br/>
+            background: #f2f8fc;<br/>
+            display: table-cell;<br/>
+            vertical-align: middle;<br/>
+            span {{'{'}}<br/>
+            position: absolute;<br/>
+            top: -9px;<br/>
+            right: -7px;<br/>
+            i {{'{'}}<br/>
+            color: #a2a4a6;<br/>
+            {{'}'}}<br/>
+            {{'}'}}<br/>
+            .deploy-new-box-left-input{{'{'}}<br/>
+            border:0;<br/>
+            text-align: center;<br/>
+            background: #f2f8fc;<br/>
+            color:#a2a4a6;<br/>
+            {{'}'}}<br/>
+
+            {{'}'}}<br/>
+            {{'}'}}<br/>
+
+            .addbtn {{'{'}}<br/>
+            i {{'{'}}<br/>
+            font-size: 24px;<br/>
+            color: #a2a4a6;;<br/>
+            {{'}'}}<br/>
+            text-align: center;<br/>
+            margin-top: 20px<br/>
+            {{'}'}}<br/>
+
+            margin-bottom: 16px;<br/>
+            position: relative;<br/>
+            .colse {{'{'}}<br/>
+            right: 5px;<br/>
+            top: 5px;<br/>
+            i {{'{'}}<br/>
+            font-size: 20px;<br/>
+            {{'}'}}<br/>
+            position: absolute;<br/>
+            {{'}'}}<br/>
+            padding: 20px;<br/>
+            background: #f1f1f1;<br/>
+            .ant-row {{'{'}}<br/>
+            margin-bottom: 10px<br/>
+            {{'}'}}<br/>
+            .right-btn {{'{'}}<br/>
+            width: 40px;<br/>
+            margin-left: -70px;<br/>
+            margin-top: 20px;<br/>
+            position: absolute;<br/>
+            button {{'{'}}<br/>
+            margin-bottom: 6px;<br/>
+            width: 40px;<br/>
+            background: #fff;<br/>
+            color: #dcdcdc;<br/>
+            i {{'{'}}<br/>
+            font-size: 25px<br/>
+            {{'}'}}<br/>
+            {{'}'}}<br/>
+            {{'}'}}<br/>
+            {{'}'}}<br/>
+          </div>
+        </div>
+
+        <div>
+          <h4>Demo</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+
+            <nz-content>
+              <h2 class='title'>模版</h2>
+              <!--标题 end-->
+
+              <!--主体内容-->
+              <div class="main">
+                <!--form表单-->
+                <form nz-form [formGroup]="validateForm">
+                  <!--添加步骤-->
+                  <div>
+                    <div nz-row [nzGutter]="18">
+                      <div nz-col class="gutter-row eploy-new-box-left" [nzSpan]="6">
+                        <!--侧边选项-->
+                        <div class="gutter-box">
+                          <div class="but_box">
+                            <button (click)="stageChange('up')" class="up"><i
+                              class="anticon anticon-up"></i></button>
+                            <button (click)="stageChange('down')" class="down"><i
+                              class="anticon anticon-down"></i></button>
+                          </div>
+                          <div class="deploy-new-box-left-div" *ngFor="let param of fmModelStages;let i = index;">
+                            <h4>步骤{{i+1}}</h4>
+                            <div class="deploy-new-box-left-div-main" [class.extra-sparkle]="param.flag"
+                                 (click)="chooseStyle(i)">
+                              <nz-tooltip [nzTitle]="param.stageName" [nzPlacement]="'top'">
+                          <textarea nz-tooltip class="deploy-new-box-left-input" [(ngModel)]="param.stageName"
+                                    [ngModelOptions]="{standalone: true}" style="max-width: 100px"></textarea>
+                                <span (click)="deleteStage(i)"><i
+                                  class="anticon anticon-close-circle"></i></span>
+                              </nz-tooltip>
+                            </div>
+                          </div>
+                          <div class="addbtn"><i class="anticon anticon-plus-circle" (click)="onAddStep()"></i></div>
+                        </div>
+                        <!--left end-->
+                      </div>
+                      <div formArrayName="Stages">
+                        <div nz-col class="gutter-row eploy-new-box-right" [nzSpan]="18"
+                             *ngFor="let p of fmModelStages;let i = index;   ">
+                          <div class="gutter-box" [hidden]="!p.flag">
+
+                            <div nz-form-item nz-row>
+                              <div nz-form-label nz-col [nzSpan]="3">
+                                <label>Stpe{{i+1}}</label>
+                              </div>
+                              <div nz-col [nzSpan]="10" nz-form-control>
+                                <nz-input [nzType]="'text'" [nzDisabled]='_disabled' [(ngModel)]="p.stageName"
+                                          [ngModelOptions]="{standalone: true}"
+                                          [nzPlaceHolder]="'请输入'" [nzSize]="'large'">
+                                </nz-input>
+                              </div>
+                            </div>
+
+                            <div nz-form-item nz-row>
+                              <div nz-form-label nz-col [nzSpan]="3">
+                                <label>任务执行</label>
+                              </div>
+                              <div nz-form-control nz-col [nzSpan]="20">
+                                <div class="right-bg-box" *ngFor="let item of p.stageTaskList;let j=index">
+                                  <div class="right-btn">
+                                    <button style="border: white;" class="left" [disabled]="_disabled"
+                                            *ngIf="j===0?false:true"
+                                            (click)="taskChange('up',i,j)"><i class="anticon anticon-up-circle"></i>
+                                    </button>
+                                    <button style="border: white;" class="left" [disabled]="_disabled"
+                                            *ngIf="j===p.stageTaskList.length-1?false:true"
+                                            (click)="taskChange('down',i,j)"><i class="anticon anticon-down-circle"></i>
+                                    </button>
+                                  </div>
+                                  <span class="colse" (click)="colse(i,j)"><i
+                                    class="anticon anticon-close"></i></span>
+                                  <div nz-row [nzGutter]="8">
+                                    <div nz-col [nzSpan]="24">
+                                      <div nz-row>
+                                        <div nz-form-label nz-col [nzSpan]="5">
+                                          <label>
+                                            Task{{j+1}}
+                                          </label>
+                                        </div>
+                                        <div nz-form-control nz-col [nzSpan]="14">
+                                          <nz-input [nzSize]="'large'" [nzDisabled]='_disabled'
+                                                    [nzPlaceHolder]="'请输入'"
+                                                    [(ngModel)]="item.taskName" [ngModelOptions]="{standalone: true}">
+
+                                          </nz-input>
+                                        </div>
+                                      </div>
+                                      <div nz-row>
+                                        <div nz-form-label nz-col [nzSpan]="5">
+                                          <label>
+                                            任务状态
+                                          </label>
+                                        </div>
+                                        <div nz-form-control nz-col [nzSpan]="14">
+                                          <nz-input [nzSize]="'large'" [nzDisabled]='_disabled'
+                                                    [nzPlaceHolder]="'请输入'"
+                                                    [(ngModel)]="item.taskStatus" [ngModelOptions]="{standalone: true}">
+
+                                          </nz-input>
+                                        </div>
+                                      </div>
+                                      <div nz-row>
+                                        <div nz-form-label nz-col [nzSpan]="5">
+                                          <label>
+                                            任务内容
+                                          </label>
+                                        </div>
+                                        <div nz-form-control nz-col [nzSpan]="14">
+                                          <nz-input [nzSize]="'large'" [nzDisabled]='_disabled'
+                                                    [nzPlaceHolder]="'请输入'"
+                                                    [(ngModel)]="item.taskContent"
+                                                    [ngModelOptions]="{standalone: true}">
+
+                                          </nz-input>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <button nz-button class="new-btn" [hidden]='_disabled' (click)="addTask(i)">
+                                  新建任务
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--添加步骤  end-->
+
+                </form>
+                <!--form表单 end-->
+
+              </div>
+              <!--主体内容 end-->
+
+            </nz-content>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</nz-content>

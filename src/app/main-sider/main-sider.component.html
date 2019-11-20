@@ -1,0 +1,14 @@
+<div style="margin: 10px;border-right: 1px #ccc solid">
+  <ul nz-menu [nzMode]="'inline'">
+    <li nz-submenu *ngFor="let fatherTittle of componentLists">
+      <span title><i class="anticon anticon-bars"></i>{{fatherTittle.name}}</span>
+      <ul>
+        <li nz-menu-item *ngFor="let component of fatherTittle.components" [routerLink]='component.routerName'>
+          <span><i class="anticon anticon-tag-o"></i>{{component.name}}</span>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+

@@ -1,0 +1,190 @@
+<nz-content>
+  <div style="line-height: 30px;margin: 10px;border-left: 2px #ccc solid;border-top: 2px #ccc solid">
+    <div style="margin: 20px;">
+      <div style="margin: 5px;">
+      <span style="font-size: 20px;font-weight: 400;">
+        <h2>{{tittle}}</h2>
+      </span>
+      </div>
+      <div>
+        <span>通过柱状图的方式去显示数据内容。</span>
+      </div>
+      <div style="margin: 20px 0">
+        <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
+          <div class="tittle">
+            <h3><span></span>柱状图基础设置</h3>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>获取数据Url字段名称</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="barUrlName" name="barUrlName"
+                        nzPlaceHolder="获取数据的Url字段的名称">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>Url</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="barUrl" name="barUrl"
+                          nzPlaceHolder="后端Url地址">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>柱状图的表头</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="barTittle" name="barTittle"
+                        nzPlaceHolder="柱状体的表头Tittle">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>数据来源信息</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="barDataFrom" name="barDataFrom"
+                          nzPlaceHolder="备注显示数据来源的信息(表头下方的备注)">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>柱状图距离左端的距离</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="barGridLeft" name="barGridLeft"
+                        nzPlaceHolder="gridLeft属性，样例(3%)">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>柱状图距离底部的距离</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="barGridBottom" name="barGridBottom"
+                          nzPlaceHolder="gridBottom属性，样例(3%)">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>X轴的数据类型</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8">
+              <nz-select
+                [nzMode]="'tag'"
+                [nzPlaceHolder]="'X轴的数据类型'"
+                [(ngModel)]="barXAxisDataType"
+                [nzNotFoundContent]="'无'"
+                [nzFilter]="true"
+                formControlName='barXAxisDataType'>
+                <nz-option nzValue="value" nzLabel="数值轴，适用于连续数据。"></nz-option>
+                <nz-option nzValue="category" nzLabel="类目轴，适用于离散的类目数据。"></nz-option>
+                <nz-option nzValue="time" nzLabel="时间轴，适用于连续的时序数据"></nz-option>
+                <nz-option nzValue="log" nzLabel="对数轴。适用于对数数据。"></nz-option>
+              </nz-select>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>Y轴的数据类型</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8">
+                <nz-select
+                  [nzMode]="'tag'"
+                  [nzPlaceHolder]="'Y轴的数据类型'"
+                  [(ngModel)]="barYAxisDataType"
+                  [nzNotFoundContent]="'无'"
+                  [nzFilter]="true"
+                  formControlName='barYAxisDataType'>
+                  <nz-option nzValue="value" nzLabel="数值轴，适用于连续数据。"></nz-option>
+                  <nz-option nzValue="category" nzLabel="类目轴，适用于离散的类目数据。"></nz-option>
+                  <nz-option nzValue="time" nzLabel="时间轴，适用于连续的时序数据"></nz-option>
+                  <nz-option nzValue="log" nzLabel="对数轴。适用于对数数据。"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>柱子的颜色</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="barSeriesColor" name="barSeriesColor"
+                        nzPlaceHolder="柱状图的柱子的颜色,样例(#CCC)">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>柱子的透明度</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="barSeriesOpacity" name="barSeriesOpacity"
+                          nzPlaceHolder="柱状图的柱子的颜色的透明度,样例(.5)">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+
+          <p>{{validateForm.value | json}}</p>
+        </form>
+        <div>
+          <h4>Html文件</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            &lt;div echarts [options]="option_bar"&gt;&lt;/div&gt;
+          </div>
+        </div>
+        <div>
+          <h4>Ts文件</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            <div>/***成员变量***/</div>
+            <div>option_bar: any;
+              <div>barTittle = '<span>{{validateForm.get('barUrlName').value}}</span>'; // 标题</div>
+              <div> barDataFrom = '<span>{{validateForm.get('barDataFrom').value}}</span>';</div>
+              <div> gridLeft = '<span>{{validateForm.get('barGridLeft').value}}</span>';</div>
+              <div> gridBottom = '<span>{{validateForm.get('barGridBottom').value}}</span>';</div>
+              <div> barXAxisDataType = 'value';</div>
+              <div> barYAxisDataType = 'category';</div>
+              <div></div>
+              <div></div>
+              <!---->
+              <!--// 展示的数据类型-->
+              <!--//  category 或者 value-->
+              <!--yAxisData = ['巴西', '印尼', '美国', '印度', '中国', '世界人口(万)'];-->
+              <!--seriesName = '2011年';-->
+              <!--seriesType = 'bar';  // line 或者 bar  是线状还是柱状-->
+              <!--seriesData = [18203, 23489, 29034, 104970, 131744, 630230];-->
+              <div>seriesItemStyleColor = '<span>{{validateForm.get('barSeriesColor')}}</span>';</div>
+              <div>seriesItemStyleOpacity = <span>{{validateForm.get('barSeriesOpacity')}}</span>;</div>
+            </div>
+          </div>
+          <div>
+            <h4>Demo演示</h4>
+          </div>
+          <div style="border: #48c2a5 1px solid">
+            <div style="margin-left: 15px;">
+              <div echarts [options]="option_bar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nz-content>

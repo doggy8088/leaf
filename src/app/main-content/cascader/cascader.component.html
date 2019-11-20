@@ -1,0 +1,215 @@
+<nz-content>
+  <div style="line-height: 30px;margin: 10px;border-left: 2px #ccc solid;border-top: 2px #ccc solid">
+    <div style="margin: 20px;">
+      <div style="margin: 5px;">
+      <span style="font-size: 20px;font-weight: 400;">
+        <h2>
+          {{title}}
+        </h2>
+      </span>
+      </div>
+      <div>
+        <span>级联选择框。</span>
+      </div>
+      <div style="margin: 20px 0">
+        <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
+          <div class="tittle">
+            <h3><span></span>级联选择框基础设置</h3>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>级联选择器前文字</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input formControlName="cascaderLabelContent" nzPlaceHolder="级联选择器前显示的文字"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>是否独占一行</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-select formControlName="cascaderNzRow" nzPlaceHolder="级联选择器一个空间是否占一行">
+                  <nz-option nzValue="0" nzLabel="是"></nz-option>
+                  <nz-option nzValue="1" nzLabel="否"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>后端接口变量名</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input nzType="text" formControlName="urlName" name="urlName"
+                        nzPlaceHolder="后端接口变量名"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>后端接口地址</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input nzType="text" formControlName="urlAddress" name="urlAddress"
+                          nzPlaceHolder="后端接口地址"></nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>标识</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input nzType="text" formControlName="cascaderSign" name="cascaderSign"
+                        nzPlaceHolder="formControlName"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>是否禁用</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-select formControlName="_disable" [(ngModel)]="_disable" nzPlaceHolder="是否禁用">
+                  <nz-option nzValue="true" nzLabel="禁用"></nz-option>
+                  <nz-option nzValue="false" nzLabel="不禁用"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>下拉数据变量名</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input nzType="text" formControlName="listName" name="listName"
+                        nzPlaceHolder="下拉数据变量名"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>获取下拉菜单方法名</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input nzType="text" formControlName="methodName" name="methodName"
+                          nzPlaceHolder="下拉菜单方法名"></nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>文字nzSpan</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input formControlName="cascaderLabelWidth" nzPlaceHolder="文字所用的宽度（1-12）"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>级联选择nzSpan</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input formControlName="cascaderSelectionWidth" nzPlaceHolder="级联选择器所用的宽度（1-12）"></nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>value的属性名称</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input formControlName="valueName" nzPlaceHolder="nzValueProperty"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>label的属性名称</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input formControlName="labelName" nzPlaceHolder="nzLabelProperty"></nz-input>
+              </div>
+            </div>
+          </div>
+          <div class="tittle">
+            <h3><span></span>级联选择框进阶设置</h3>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>PlaceHolder</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input nzType="text" formControlName="cascaderPlaceHolder" name="cascaderPlaceHolder"
+                        nzPlaceHolder="级联选择的PlaceHolder"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>是否独占一行</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-select formControlName="cascaderNzRow" nzPlaceHolder="是否占一行">
+                  <nz-option nzValue="nz-row" nzLabel="是"></nz-option>
+                  <nz-option nzValue="" nzLabel="否"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+          </div>
+          <div class="tittle">
+            <h3><span></span>代码生成</h3>
+          </div>
+          <div>
+            <h4>HTML文件代码</h4>
+          </div>
+          <div>&lt;div nz-form-item {{validateForm.get('cascaderNzRow').value}}&gt;</div>
+          <div> &lt;div nz-form-label nz-col [nzSpan]="<span>{{validateForm.get('cascaderLabelWidth').value}}</span>"&gt;</div>
+          <div>&lt;label nz-form-item-required&gt;{{validateForm.get('cascaderLabelContent').value}}&lt;/label&gt;</div>
+          <div>&lt;/div&gt;</div>
+          <div>&lt;div nz-col [nzSpan]="{{validateForm.get('cascaderSelectionWidth').value}}" nz-form-control&gt;</div>
+          <div>&lt;nz-cascader formControlName="{{validateForm.get('cascaderSign').value}}"</div>
+          <div>name="{{validateForm.get('cascaderSign').value}}"</div>
+          <div>[nzOptions]="{{validateForm.get('listName').value}}"</div>
+          <div>[nzValueProperty]="'{{validateForm.get('valueName').value}}'"</div>
+          <div>[nzLabelProperty]="'{{validateForm.get('labelName').value}}'"</div>
+          <div>[nzDisabled]='{{validateForm.get('_disable').value}}'</div>
+          <div>[nzPlaceHolder]="{{validateForm.get('cascaderPlaceHolder').value}}"&gt;</div>
+          <div>&lt;/nz-cascader&gt;</div>
+          <div>&lt;/div&gt;</div>
+          <div>&lt;/div&gt;</div>
+          <div>
+            <h4>TS文件代码</h4>
+          </div>
+          <div style="border: #48c2a5 1px solid">
+            <div style="margin-left: 15px;">
+              <div>{{validateForm.get('listName').value}} = [];</div>
+              <div>private {{validateForm.get('urlName').value}} = {{validateForm.get('urlAddress').value}};</div>
+              <div>{{validateForm.get('valueName').value}} = 'id';</div>
+              <div>{{validateForm.get('labelName').value}} = 'name';</div>
+              <div>/***获取数据函数***/</div>
+              <div>{{validateForm.get('methodName').value}}(){{'{'}}</div>
+              <div>this.{{validateForm.get('listName').value}} = [];</div>
+              <div>const {{validateForm.get('urlName').value}} = `{{validateForm.get('urlAddress').value}}`;</div>
+              <div>return this.httpService._getsData({{validateForm.get('urlName').value}}).subscribe(res=> {{'{'}}</div>
+              <div>this.{{validateForm.get('listName').value}} = res;</div>
+              <div>{{'}'}});</div>
+              <div>{{'}'}}</div>
+            </div>
+          </div>
+          <div>
+            <h4>Demo演示</h4>
+          </div>
+          <div style="border: #48c2a5 1px solid">
+            <div style="margin-left: 15px;">
+              <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="validateForm.get('cascaderLabelWidth').value">
+                  <label nz-form-item>{{validateForm.get('cascaderLabelContent').value}}</label>
+                </div>
+              <div nz-col [nzSpan]="validateForm.get('cascaderSelectionWidth').value" nz-form-control>
+                <nz-cascader
+                             nzListType="text"
+                             [nzOptions]="selectList"
+                             [nzValueProperty]= "'id'"
+                             [nzLabelProperty]="'name'"
+                             [nzPlaceHolder]="validateForm.get('cascaderPlaceHolder').value"
+                             [nzDisabled]="validateForm.get('_disable').value">
+                </nz-cascader>
+              </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</nz-content>

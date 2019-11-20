@@ -1,0 +1,145 @@
+<nz-content>
+  <div style="line-height: 30px;margin: 10px;border-left: 2px #ccc solid;border-top: 2px #ccc solid">
+    <div style="margin: 20px;">
+      <div style="margin: 5px;">
+      <span style="font-size: 20px;font-weight: 400;">
+        <h2>
+          {{tittle}}
+        </h2>
+      </span>
+      </div>
+      <div>
+        <span>显示当前页面在系统层级结构中的位置，并能向上返回。</span>
+      </div>
+      <div style="margin: 20px 0">
+        <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
+          <div class="tittle">
+            <h3><span></span>输入框基础设置</h3>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>一级(默认)Router</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input nzType="text" formControlName="firstRouter" name="firstRouter" nzPlaceHolder="请输入一级面包屑"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>一级(默认)面包屑</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8">
+                <nz-input nzType="text" formControlName="first" name="first" nzPlaceHolder="请输入一级路由"></nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>二级Router</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input nzType="text" formControlName="secondRouter" name="secondRouter" nzPlaceHolder="请输入二级面包屑"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>二级面包屑</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8">
+                <nz-input nzType="text" formControlName="second" name="second" nzPlaceHolder="请输入二级路由"></nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>三级Router</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input nzType="text" formControlName="thirdRouter" name="thirdRouter" nzPlaceHolder="请输入三级面包屑"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>三级面包屑</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8">
+                <nz-input nzType="text" formControlName="third" name="third" nzPlaceHolder="请输入三级路由"></nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>四级Router</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input nzType="text" formControlName="forthRouter" name="forthRouter" nzPlaceHolder="请输入四级面包屑"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>四级面包屑</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8">
+                <nz-input nzType="text" formControlName="forth" name="forth" nzPlaceHolder="请输入四级路由"></nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>五级Router</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input nzType="text" formControlName="fifthRouter" name="fifthRouter" nzPlaceHolder="请输入五级面包屑"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>五级面包屑</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8">
+                <nz-input nzType="text" formControlName="fifth" name="fifth" nzPlaceHolder="请输入五级路由"></nz-input>
+              </div>
+            </div>
+          </div>
+          <div class="tittle">
+            <h3><span></span>代码生成</h3>
+          </div>
+          <div>
+            <h4>HTML文件代码</h4>
+          </div>
+          <div style="border: #48c2a5 1px solid">
+            <div style="margin-left: 15px;">
+              <div>&lt;nz-breadcrumb&gt;</div>
+              <div *ngIf="validateForm.get('first').value && validateForm.get('firstRouter').value">
+                <div>&lt;nz-breadcrumb-item&gt;</div>
+                <div>&lt;a [routerLink]="['<span>{{validateForm.get('firstRouter').value}}</span>/']"&gt;{{validateForm.get('first').value}}&lt;/a&gt;
+                </div>
+                <div>&lt;/nz-breadcrumb-item&gt;</div>
+              </div>
+              <div *ngIf="validateForm.get('first').value && validateForm.get('first').value && validateForm.get('second').value && validateForm.get('secondRouter').value">
+                <div>&lt;nz-breadcrumb-item&gt;</div>
+                <div>&lt;a [routerLink]="['<span>{{validateForm.get('firstRouter').value}}</span>/<span>{{validateForm.get('secondRouter').value}}/']"&gt;</span>{{validateForm.get('second').value}}&lt;/a&gt;
+                </div>
+                <div>&lt;/nz-breadcrumb-item&gt;</div>
+              </div>
+              <div *ngIf="validateForm.get('first').value && validateForm.get('first').value && validateForm.get('second').value && validateForm.get('secondRouter').value && validateForm.get('third').value && validateForm.get('thirdRouter').value">
+                <div>&lt;nz-breadcrumb-item&gt;</div>
+                <div>&lt;a [routerLink]="['<span>{{validateForm.get('firstRouter').value}}</span>/<span>{{validateForm.get('secondRouter').value}}/{{validateForm.get('thirdRouter').value}}/']"&gt;</span>{{validateForm.get('third').value}}&lt;/a&gt;
+                </div>
+                <div>&lt;/nz-breadcrumb-item&gt;</div>
+              </div>
+              <div *ngIf="validateForm.get('first').value && validateForm.get('first').value && validateForm.get('second').value && validateForm.get('secondRouter').value && validateForm.get('third').value && validateForm.get('thirdRouter').value && validateForm.get('forth').value && validateForm.get('forthRouter').value">
+                <div>&lt;nz-breadcrumb-item&gt;</div>
+                <div>&lt;a [routerLink]="['<span>{{validateForm.get('firstRouter').value}}</span>/<span>{{validateForm.get('secondRouter').value}}/{{validateForm.get('thirdRouter').value}}/{{validateForm.get('forthRouter').value}}/']"&gt;</span>{{validateForm.get('forth').value}}&lt;/a&gt;
+                </div>
+                <div>&lt;/nz-breadcrumb-item&gt;</div>
+              </div>
+              <div *ngIf="validateForm.get('first').value && validateForm.get('first').value && validateForm.get('second').value && validateForm.get('secondRouter').value && validateForm.get('third').value && validateForm.get('thirdRouter').value && validateForm.get('forth').value && validateForm.get('forthRouter').value && validateForm.get('fifth').value && validateForm.get('fifthRouter').value">
+                <div>&lt;nz-breadcrumb-item&gt;</div>
+                <div>&lt;a [routerLink]="['<span>{{validateForm.get('firstRouter').value}}</span>/<span>{{validateForm.get('secondRouter').value}}/{{validateForm.get('thirdRouter').value}}/{{validateForm.get('forthRouter').value}}/{{validateForm.get('fifthRouter').value}}/']"&gt;</span>{{validateForm.get('fifth').value}}&lt;/a&gt;
+                </div>
+                <div>&lt;/nz-breadcrumb-item&gt;</div>
+              </div>
+              <div>&lt;/nz-breadcrumb&gt;</div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</nz-content>

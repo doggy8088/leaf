@@ -1,0 +1,482 @@
+<nz-content>
+  <div style="line-height: 30px;margin: 10px;border-left: 2px #ccc solid;border-top: 2px #ccc solid">
+    <div style="margin: 20px;">
+      <div style="margin: 5px;">
+      <span style="font-size: 20px;font-weight: 400;">
+        <h2>{{tittle}}</h2>
+      </span>
+      </div>
+      <div>
+        <span>通过柱状，折线混合起来的方式去显示数据内容。</span>
+      </div>
+      <div style="margin: 20px 0">
+        <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
+          <div class="tittle">
+            <h3><span></span>折线柱状图基础设置</h3>
+          </div>
+
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>获取数据的URL字段</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="lineUrlName" name="lineUrlName"
+                        nzPlaceHolder="获取数据的URL的变量名称">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>获取数据的URL</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="lineUrl" name="lineUrl"
+                          nzPlaceHolder="获取数据的URL地址">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>分类信息距离顶部距离</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="lineLegendTop" name="lineLegendTop"
+                        nzPlaceHolder="分类信息的距离顶的位置（数值0）">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>分类信息距离右边距离</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="lineLegendRight" name="lineLegendRight"
+                          nzPlaceHolder="分类信息的距离右边位置（数值50）">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>分类信息的字体颜色</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="lineLegendTextStyleColor"
+                        name="lineLegendTextStyleColor" nzPlaceHolder="分类信息的字体颜色(#CCC)">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>分类信息的字体大小</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="lineLegendTextStyleFontSize"
+                          name="lineLegendTextStyleFontSize" nzPlaceHolder="分类信息的字体大小(像素eg:50px)">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>X轴的数据类型</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8">
+              <nz-select
+                [nzMode]="'tag'"
+                [nzPlaceHolder]="'X轴的数据类型'"
+                [(ngModel)]="lineXAxisDataType"
+                [nzNotFoundContent]="'无'"
+                [nzFilter]="true"
+                formControlName='lineXAxisDataType'>
+                <nz-option nzValue="value" nzLabel="数值轴，适用于连续数据。"></nz-option>
+                <nz-option nzValue="category" nzLabel="类目轴，适用于离散的类目数据。"></nz-option>
+                <nz-option nzValue="time" nzLabel="时间轴，适用于连续的时序数据"></nz-option>
+                <nz-option nzValue="log" nzLabel="对数轴。适用于对数数据。"></nz-option>
+              </nz-select>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>X轴线条的颜色</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="lineXAxissplitLineColor"
+                          name="lineXAxissplitLineColor" nzPlaceHolder="X轴线条的颜色(#ccc)">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>Y轴的数据类型</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8">
+              <nz-select
+                [nzMode]="'tag'"
+                [nzPlaceHolder]="'Y轴的数据类型'"
+                [(ngModel)]="lineYAxisDataType"
+                [nzNotFoundContent]="'无'"
+                [nzFilter]="true"
+                formControlName='lineYAxisDataType'>
+                <nz-option nzValue="value" nzLabel="数值轴，适用于连续数据。"></nz-option>
+                <nz-option nzValue="category" nzLabel="类目轴，适用于离散的类目数据。"></nz-option>
+                <nz-option nzValue="time" nzLabel="时间轴，适用于连续的时序数据"></nz-option>
+                <nz-option nzValue="log" nzLabel="对数轴。适用于对数数据。"></nz-option>
+              </nz-select>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>Y轴线条的颜色</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="lineYAxissplitLineColor"
+                          name="lineYAxissplitLineColor" nzPlaceHolder="Y轴线条的颜色(#ccc)">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>图表距离顶部的距离</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="lineGridTop" name="lineGridTop"
+                        nzPlaceHolder="图表距离顶部的距离（例子：20%）">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>图表距离右边的距离</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="lineGridRight" name="lineGridRight"
+                          nzPlaceHolder="图表距离右边的距离（例子：20%）">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>数据是否累加</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8">
+              <nz-select formControlName="lineDataAdd" nzPlaceHolder="数据是否累加">
+                <nz-option nzValue="0" nzLabel="是"></nz-option>
+                <nz-option nzValue="1" nzLabel="否"></nz-option>
+              </nz-select>
+            </div>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>折线或光滑曲线</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8">
+              <nz-select formControlName="lineChooseLineType" nzPlaceHolder="显示折线或光滑曲线">
+                <nz-option nzValue="0" nzLabel="折线"></nz-option>
+                <nz-option nzValue="1" nzLabel="曲线"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>线的宽度</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="lineWidth" name="lineWidth"
+                        nzPlaceHolder="线的宽度(数值eg:4)">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>是否显示阴影</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8">
+                <nz-select formControlName="lineArea" nzPlaceHolder="线下显示阴影">
+                  <nz-option nzValue="0" nzLabel="是"></nz-option>
+                  <nz-option nzValue="1" nzLabel="否"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div>
+          <h4>Html文件</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            &lt;div echarts [options]="TimeLonOption"&gt; &lt;/div&gt;<br/>
+            &lt;div style="font-size: 15px;" (click)="handClick()"&gt;&lt;span&gt;<br/>
+            &lt;i class="fa fa-paint-brush" aria-hidden="true"&gt;&lt;/i&gt;更改颜色&lt;/span&gt;&lt;/div&gt;<br/>
+            &lt;nz-modal [(nzVisible)]="isVisible" [nzTitle]="'选择颜色'" [nzContent]="modalContent"
+            (nzOnCancel)="handleModalCancel()"<br/>
+            (nzOnOk)="handleModalOk()"&gt;<br/>
+            &lt;ng-template #modalContent&gt;<br/>
+            &lt;div style="height: 300px;width: 500px;display: flex;flex-wrap: wrap"&gt;<br/>
+            &lt;div *ngFor="let colors of colorLibrary;"<br/>
+            [class.borderStyle]="colors.flag"<br/>
+            style="background-color: white;padding: 4px;height: 50px;width: 50px;margin: 20px"&gt;<br/>
+            &lt;div (click)="chooseColor(colors)" [style.backgroundColor]="colors.color"<br/>
+            style="height: 40px;width: 40px;"&gt;&lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/ng-template&gt;<br/>
+            &lt;/nz-modal&gt;<br/>
+
+          </div>
+        </div>
+        <div>
+          <h4>Ts文件</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            <div>/***成员变量***/</div>
+            <div>
+              //数据格式
+              lineData = {{'{'}}<br/>
+              name: ['待处理', '处理中', '已解决'],<br/>
+              xData: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],<br/>
+              data: [<br/>
+              ['1', '2', '3', '1', '2', '3', '4'],<br/>
+              ['1', '2', '3', '1', '2', '3', '6'],<br/>
+              ['1', '2', '3', '1', '2', '3', '9'],<br/>
+              ],<br/>
+              {{'}'}};<br/>
+              isVisible = false;<br/>
+              colorLists = [];<br/>
+              colorLibrary = [<br/>
+              {{'{'}}key: 0, color: '#13aa89', flag: false{{'}'}},<br/>
+              {{'{'}}key: 1, color: '#28ade1', flag: false{{'}'}},<br/>
+              {{'{'}}key: 2, color: '#ff9065', flag: false{{'}'}},<br/>
+              {{'{'}}key: 3, color: '#f2c646', flag: false{{'}'}},<br/>
+              {{'{'}}key: 4, color: '#2ee8bb', flag: false{{'}'}},<br/>
+              {{'{'}}key: 5, color: '#f26d99', flag: false{{'}'}},<br/>
+              {{'{'}}key: 6, color: '#FC7D7D', flag: false{{'}'}},<br/>
+              {{'{'}}key: 7, color: '#bce9df', flag: false{{'}'}},<br/>
+              {{'{'}}key: 8, color: '#ca967f', flag: false{{'}'}},<br/>
+              {{'{'}}key: 9, color: '#CCCCFF', flag: false{{'}'}}<br/>
+              ];<br/>
+              <span>{{validateForm.get('lineUrlName').value}}</span> =
+              '<span>{{validateForm.get('lineUrl').value}}</span>';<br/>
+              // 线形图参数的各项配置<br/>
+              legendData = [];<br/>
+              legendTop = <span>{{validateForm.get('lineLegendTop').value}}</span>; // 距离底部距离<br/>
+              legendRight = <span>{{validateForm.get('lineLegendRight').value}}</span>; // 具离右边距离<br/>
+              legendTextStyleColor = '<span>{{validateForm.get('lineLegendTextStyleColor').value}}</span>'; //
+              分类的字体颜色<br/>
+              legendTextStyleFontSize = '<span>{{validateForm.get('lineLegendTextStyleFontSize').value}}</span>'; //
+              分类的字体大小<br/>
+              xAxisData = [];<br/>
+              xAxissplitLineColor = '<span>{{validateForm.get('lineXAxissplitLineColor').value}}</span>'; // X轴线的颜色<br/>
+              xAxisSplitLineShow = true; //
+              是否显示x轴线<br/>
+              yAxisSplitLineColor = '<span>{{validateForm.get('lineYAxissplitLineColor').value}}</span>';<br/>
+              yAxisSplitLineShow = true; //
+              是否显示X周线<br/>
+              colorList = [];<br/>
+              gridRight = '<span>{{validateForm.get('lineGridRight').value}}</span>'; // 距离右边的距离<br/>
+              gridTop = '<span>{{validateForm.get('lineGridTop').value}}</span>'; // 距离上边的距离<br/>
+
+              series = []; // 真实的数据<br/>
+              seriesSmooth = <span>{{seriesSmooth}}</span>; // 线条光滑<br/>
+              seriesLineStyleWidth = <span>{{validateForm.get('lineWidth').value}}</span>; // 线宽<br/>
+              seriesLineStyleColor; // 线的颜色<br/>
+              seriesItemStyleColor; // 阴影颜色
+            </div>
+            <div>/***函数***/</div>
+            <div>
+              setSeriesData() {{'{'}}<br/>
+              this.httpservice._get(this.url).subscribe(res => {{'{'}}<br/>
+              if (res) {{'{'}}<br/>
+              this.lineData = res;<br/>
+              this.legendData = this.lineData.name;<br/>
+              this.xAxisData = this.lineData.xData;<br/>
+              const dValue = (this.lineData.name.length - this.colorList.length);<br/>
+              for (let i = 0; i < dValue; i++) {{'{'}}<br/>
+              if ((this.lineData.name.length - this.colorList.length) >= 0) {{'{'}}<br/>
+              const number = Math.random();<br/>
+              const colorKey = Number(number.toFixed(1)) * 10;<br/>
+              this.colorList.push(this.colorLibrary[colorKey]);<br/>
+              {{'}'}}<br/>
+              {{'}'}}<br/>
+              this.lineData.name.forEach((opt, i) => {{'{'}}<br/>
+              this.series.forEach((opt, i) => {{'{'}}<br/>
+              opt.lineStyle.normal.color = this.colorList[i].color;<br/>
+              opt.itemStyle.normal.color = this.colorList[i].color;<br/>
+              opt.areaStyle.normal.color = this.colorList[i].color;<br/>
+              {{'}'}});<br/>
+              this.series.push(seriesObj);<br/>
+              {{'}'}});<br/>
+              this.getTimeLonOption();<br/>
+              {{'}'}}<br/>
+              {{'}'}}<br/>
+              );<br/>
+              {{'}'}}<br/>
+              setSeries() {{'{'}}<br/>
+              this.lineData.name.forEach((opt, i) => {{'{'}}<br/>
+              const seriesObj = {{'{'}}<br/>
+              name: opt,<br/>
+              type: 'line',<br/>
+              smooth: this.seriesSmooth,<br/>
+              data: this.lineData.data[i],<br/>
+              lineStyle: {{'{'}}<br/>
+              normal: {{'{'}}<br/>
+              color: this.colorList[i].color,<br/>
+              width: this.seriesLineStyleWidth,<br/>
+              {{'}'}},<br/>
+              {{'}'}},<br/>
+              itemStyle: {{'{'}}<br/>
+              normal: {{'{'}}<br/>
+              color: this.colorList[i].color,<br/>
+              {{'}'}},<br/>
+              {{'}'}},<br/>
+              areaStyle: {{'{'}}<br/>
+              normal: {{'{'}}<br/>
+              color: this.colorList[i].color,<br/>
+              opacity: 0.6,<br/>
+              {{'}'}},<br/>
+              {{'}'}},<br/>
+              {{'}'}};<br/>
+              this.series.push(seriesObj);<br/>
+              {{'}'}});<br/>
+              {{'}'}}<br/>
+              getTimeLonOption(): void {{'{'}}<br/>
+              this.TimeLonOption = {{'{'}}<br/>
+              tooltip: {{'{'}}<br/>
+              trigger: 'axis',<br/>
+              axisPointer: {{'{'}}<br/>
+              type: 'cross',<br/>
+              label: {{'{'}}<br/>
+              backgroundColor: '#6a7985'<br/>
+              {{'}'}}<br/>
+              {{'}'}}<br/>
+              {{'}'}},<br/>
+              legend: {{'{'}}<br/>
+              data: this.legendData,<br/>
+              top: this.legendTop,<br/>
+              right: this.legendRight,<br/>
+              textStyle: {{'{'}}<br/>
+              color: this.legendTextStyleColor,<br/>
+              fontSize: this.legendTextStyleFontSize,<br/>
+              {{'}'}},<br/>
+              {{'}'}},<br/>
+              grid: {{'{'}} // 图示距离父组件的位置<br/>
+              top: this.gridTop,<br/>
+              right: this.gridRight,<br/>
+              containLabel: true<br/>
+              {{'}'}},<br/>
+              xAxis: [<br/>
+              {{'{'}}<br/>
+              type: '<span>{{validateForm.get('lineXAxisDataType').value}}</span>',<br/>
+              boundaryGap: false,<br/>
+              data: this.xAxisData,<br/>
+              axisLine: {{'{'}}<br/>
+              show: true,<br/>
+              onZero: true,<br/>
+              lineStyle: {{'{'}}<br/>
+              color: '#a7a7a7',<br/>
+              width: 1,<br/>
+              type: 'solid',<br/>
+              {{'}'}},<br/>
+              {{'}'}},<br/>
+              splitLine: {{'{'}}<br/>
+              show: this.xAxisSplitLineShow,<br/>
+              interval: 'auto',<br/>
+              lineStyle: {{'{'}}<br/>
+              color: this.xAxissplitLineColor, // ['#e6e6e6']<br/>
+              width: 1,<br/>
+              type: 'solid',<br/>
+              {{'}'}},<br/>
+              {{'}'}}<br/>
+              {{'}'}}<br/>
+              ],<br/>
+              yAxis: [<br/>
+              {{'{'}}<br/>
+              type: '<span>{{validateForm.get('lineYAxisDataType').value}}</span>',<br/>
+              axisLine: {{'{'}}<br/>
+              show: true,<br/>
+              onZero: true,<br/>
+              lineStyle: {{'{'}}<br/>
+              color: '#a7a7a7',<br/>
+              width: 1,<br/>
+              type: 'solid',<br/>
+              {{'}'}},<br/>
+              {{'}'}},<br/>
+              axisLabel: {{'{'}}<br/>
+              formatter: '{{'{'}}value{{'}'}}',<br/>
+              {{'}'}},<br/>
+              splitLine: {{'{'}}<br/>
+              show: this.yAxisSplitLineShow,<br/>
+              interval: 'auto',<br/>
+              lineStyle: {{'{'}}<br/>
+              color: this.yAxisSplitLineColor, // ['#e6e6e6'],<br/>
+              width: 1,<br/>
+              type: 'solid',<br/>
+              {{'}'}},<br/>
+              {{'}'}}<br/>
+              {{'}'}}<br/>
+              ],<br/>
+              series: this.series,<br/>
+              {{'}'}};<br/>
+              {{'}'}}<br/>
+
+              handClick() {{'{'}}<br/>
+              this.isVisible = true;<br/>
+              {{'}'}}<br/>
+
+              handleModalCancel() {{'{'}}<br/>
+              this.isVisible = false;<br/>
+              {{'}'}}<br/>
+
+              handleModalOk() {{'{'}}<br/>
+              this.colorList = this.colorLists;<br/>
+              this.isVisible = false;<br/>
+              console.log(this.colorList);<br/>
+              this.setSeriesData();<br/>
+              {{'}'}}<br/>
+
+              chooseColor(item) {{'{'}}<br/>
+              if (item.flag === false) {{'{'}}<br/>
+              item.flag = true;<br/>
+              this.colorLists.push(item);<br/>
+              {{'}'}} else {{'{'}}<br/>
+              item.flag = false;<br/>
+              this.colorLists.forEach((opt, j) => {{'{'}}<br/>
+              if (opt.key === item.key) {{'{'}}<br/>
+              this.colorLists.splice(j, 1);<br/>
+              {{'}'}}<br/>
+              {{'}'}});<br/>
+              {{'}'}}<br/>
+              {{'}'}}<br/>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4>Demo演示</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            <div style="font-size: 15px;" (click)="handClick()"><span>
+              <i class="fa fa-paint-brush" aria-hidden="true"></i>更改颜色</span></div>
+            <div echarts [options]="TimeLonOption"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="'选择颜色'" [nzContent]="modalContent" (nzOnCancel)="handleModalCancel()"
+            (nzOnOk)="handleModalOk()">
+    <ng-template #modalContent>
+      <div style="height: 300px;width: 500px;display: flex;flex-wrap: wrap">
+        <div *ngFor="let colors of colorLibrary;"
+             [class.borderStyle]="colors.flag"
+             style="background-color: white;padding: 4px;height: 50px;width: 50px;margin: 20px">
+          <div (click)="chooseColor(colors)" [style.backgroundColor]="colors.color"
+               style="height: 40px;width: 40px;"></div>
+        </div>
+      </div>
+    </ng-template>
+  </nz-modal>
+</nz-content>

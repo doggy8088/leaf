@@ -1,0 +1,104 @@
+<nz-content>
+  <div style="line-height: 30px;margin: 10px;border-left: 2px #ccc solid;border-top: 2px #ccc solid">
+    <div style="margin: 20px;">
+      <div style="margin: 5px;">
+        <span style="font-size: 20px;font-weight: 400;">
+          <h2>
+            {{title}}
+          </h2>
+        </span>
+      </div>
+      <div>
+        <span>
+          模态对话框。
+        </span>
+      </div>
+      <div style="margin: 20px 0">
+        <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
+          <div class="tittle">
+            <h3>对话框基础设置</h3>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>对话框标题</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input nzType="text" formControlName="modalTitle" name="modalTitle" nzPlaceHolder="输入对话框标题"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>对话框内容</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input formControlName="modalContent" nzPlaceHolder="对话框内容"></nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>对话框按钮文字</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input nzType="text" formControlName="modalButtonContent" name="modalButtonContent"
+                        nzPlaceHolder="输入对话框按钮显示文字"></nz-input>
+            </div>
+          </div>
+        </form>
+        <div class="tittle">
+          <h3><span></span>代码生成</h3>
+        </div>
+        <div>
+          <h4>HTML文件代码</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            <div>&lt;button nz-button [nzType]="'primary'" (click)="showModal()"&gt;&lt;span&gt;{{validateForm.get('modalButtonContent').value}}&lt;/span&gt;&lt;/button&gt;</div>
+            <div>&lt;nz-modal [(nzVisible)]="isVisible" nzTitle="{{validateForm.get('modalTitle').value}}"
+              (nzOnCancel)="handleCancel()" [nzContent]="modalContent" (nzOnOk)="handleOk()"&gt;
+            </div>
+            <div>&lt;ng-template #modalContent&gt;
+              &lt;p&gt;{{validateForm.get('modalContent').value}}&lt;/p&gt;
+              &lt;/ng-template&gt;
+            </div>
+            <div>&lt;/nz-modal&gt;</div>
+          </div>
+        </div>
+        <div>
+          <h4>TS文件代码</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            <div>isVisible = false;</div>
+            <div>showModal(): void {{'{'}}</div>
+            <div>&nbsp;&nbsp;this.isVisible = true;</div>
+            <div>{{'}'}}</div>
+            <div>handleOk(): void {{'{'}}</div>
+            <div>&nbsp;&nbsp;this.isVisible = false;</div>
+            <div>{{'}'}}</div>
+            <div>handleCancel(): void {{'{'}}</div>
+            <div>&nbsp;&nbsp;this.isVisible = false;</div>
+            <div>{{'}'}}</div>
+          </div>
+        </div>
+        <div>
+          <h4>Demo演示</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            <div style="margin: 20px 0">
+              <button nz-button [nzType]="'primary'" (click)="showModal()"><span>{{validateForm.get('modalButtonContent').value}}</span>
+              </button>
+              <nz-modal [(nzVisible)]="isVisible" nzTitle="{{validateForm.get('modalTitle').value}}"
+                        (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzContent]="modalContent">
+                <ng-template #modalContent>
+                  <p>{{validateForm.get('modalContent').value}}</p>
+                </ng-template>
+              </nz-modal>
+            </div>
+          </div>
+        </div>
+        <!--<p>{{validateForm.value |json}}</p>-->
+      </div>
+    </div>
+  </div>
+</nz-content>

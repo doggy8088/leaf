@@ -1,0 +1,128 @@
+<nz-content>
+  <div style="line-height: 30px;margin: 10px;border-left: 2px #ccc solid;border-top: 2px #ccc solid">
+    <div style="margin: 20px;">
+      <div style="margin: 5px;">
+      <span style="font-size: 20px;font-weight: 400;">
+        <h2>
+          {{title}}
+        </h2>
+      </span>
+      </div>
+      <div>
+        <span>输入或选择日期的控件。</span>
+      </div>
+      <div style="margin: 20px 0">
+        <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
+          <div class="tittle">
+            <h3><span></span>日期选择框基础设置</h3>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>日期选择框前显示内容</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input nzType="text" formControlName="subTitle" name="subTitle" nzPlaceHolder="日期选择框前显示的文字"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>是否禁用</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-select formControlName="_disable" [(ngModel)]="_disable" nzPlaceHolder="是否禁用">
+                  <nz-option nzValue="true" nzLabel="禁用"></nz-option>
+                  <nz-option nzValue="false" nzLabel="不禁用"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>文字nzSpan</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input formControlName="dateLabelSpan" nzPlaceHolder="文字所用的宽度（1-12）"></nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>输入框nzSpan</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input formControlName="dateSpan" nzPlaceHolder="输入框所用的宽度（1-12）"></nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>日期选择器标识</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input formControlName="dateSign" nzPlaceHolder="formControlName"></nz-input>
+            </div>
+          </div>
+          <div class="tittle">
+            <h3><span></span>日期选择框进阶设置</h3>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>Placeholder</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input nzType="text" formControlName="place" name="place" nzPlaceHolder="选择器的placeholder显示内容"></nz-input>
+            </div>
+          <div nz-form-item>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>是否独占一行</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-select formControlName="inputNzRow" nzPlaceHolder="一个空间是否占一行">
+                <nz-option nzValue="0" nzLabel="是"></nz-option>
+                <nz-option nzValue="1" nzLabel="否"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+          </div>
+          <div class="tittle">
+            <h3><span></span>代码生成</h3>
+          </div>
+          <div>
+            <h4>HTML文件代码</h4>
+          </div>
+          <div style="border: #48c2a5 1px solid">
+            <div style="margin-left: 15px;">
+              <div>&lt;div nz-form-item <span>{{inputNzRowValue}}</span>&gt;</div>
+              <div>&lt;div nz-form-label nz-col [nzSpan]="<span>{{validateForm.get('dateLabelSpan').value}}</span>"&gt;</div>
+              <div>&lt;label nz-form-item&gt;{{validateForm.get('subTitle').value}}&lt;/label&gt;</div>
+              <div>&lt;/div&gt;</div>
+              <div>&lt;div nz-col [nzSpan] = "<span>{{validateForm.get('dateSpan').value}}</span>" nz-form-control&gt;</div><div>&lt;nz-datepicker name='{{validateForm.get('dateSign').value}}' formControlName = "{{validateForm.get('dateSign').value}}" [nzPlaceHolder]="{{validateForm.get('place').value}}" [nzDisabled]="{{validateForm.get('_disable').value}}"&gt;&lt;/nz-datepicker&gt;</div>
+              <div>&lt;/div&gt;</div>
+            </div>
+          </div>
+          <div>
+            <h4>TS文件代码</h4>
+          </div>
+          <div style="border: #48c2a5 1px solid">
+            <div style="margin-left: 15px;">
+              <div>public {{validateForm.get('dateSign').value}}: string;</div>
+              <div><span>{{validateForm.get('dateSign').value}}: [null]</span></div>
+            </div>
+          </div>
+          <div>
+            <h4>Demo演示</h4>
+          </div>
+          <div style="border: #48c2a5 1px solid">
+            <div style="margin-left: 15px;">
+              <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="validateForm.get('dateLabelSpan').value">
+                  <label nz-form-item>{{validateForm.get('subTitle').value}}</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="validateForm.get('dateSpan').value" nzHasFeedback>
+                <nz-datepicker  [nzPlaceHolder]="validateForm.get('place').value" [nzDisabled]="validateForm.get('_disable').value"></nz-datepicker>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</nz-content>

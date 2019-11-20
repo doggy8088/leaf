@@ -1,0 +1,422 @@
+<nz-content>
+  <div style="line-height: 30px;margin: 10px;border-left: 2px #ccc solid;border-top: 2px #ccc solid">
+    <div style="margin: 20px;">
+      <div style="margin: 5px;">
+      <span style="font-size: 20px;font-weight: 400;">
+        <h2>
+          {{tittle}}
+        </h2>
+      </span>
+      </div>
+      <div>
+        <span>编码的规范守则</span>
+      </div>
+      <div style="margin: 20px 0">
+        <div class="tittle">
+          <h2><span></span>生产细节规范</h2>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div> 0. 没有bug可以不遵守如下规则，一旦出现，必须全部遵守</div>
+            <div> 1. 生成的过程，尽可能使用ng generate component</div>
+            <div> 2. 文件名规范：文件名中包含-，内容中为大驼峰/小驼峰</div>
+            <div> ng g componenet script-management</div>
+            <div> ng g componenet scriptManagement</div>
+            <div> 3. spec.ts文件不要删除</div>
+            <div> 4. 统一使用less</div>
+            <div> 5. 注释：html模版页面，汉字用于定位功能快</div>
+            <div> less注释定位位置：汉字</div>
+            <div> ts文件：变量注释+函数注释</div>
+            <div> 6. 排版： 使用工具本身提供格式化功能，每次提交前格式化</div>
+            <div> 7. class成员变量：</div>
+            <div> 全部加上private/public的前缀，内部使用的变量private即可</div>
+            <div> 命名上全部以_开始（显示与否等建议命名为_isXXX）</div>
+            <div> 成员变量的声明区域为最开始部分</div>
+            <div> 8. class函数</div>
+            <div> 普通命名前缀：fun+大驼峰</div>
+            <div> 事件驱动方式：handle+大驼峰</div>
+            <div> 9. class声明位置</div>
+            <div> 成员变量</div>
+            <div> 构造函数</div>
+            <div> ngOnInit</div>
+            <div> 其他ng相关函数</div>
+            <div> 自定义函数</div>
+            <div> 10. 活用const，只使用了一次的变量，尽量使用const</div>
+            <div> 11. 规范变量生命域，活用let</div>
+            <div> 12. 禁止使用MagicNumber，活用CONST类</div>
+            <div> 13. html页面中的判空，循环中一定要加，tab.name -》 tab?.name</div>
+            <div> 14. 禁止单独使用id/name/key/value/type/class诸如关键字或者保留关键字或者类关键字的word作为变量名称。</div>
+            <div> 15. 一行不能超过140（ng lint缺省）</div>
+            <div>函数尽可能不要超过70行（angular建议）</div>
+            <div> 16. 尽量减少使用全局变量进行值传递</div>
+            <div> 17. HTML中尽量减少使用div的层次</div>
+            <div> 18. 增加_actionType类成员变量</div>
+            <div> 增加handleAction类成员函数('C/R/U/D',...)</div>
+            <div> 增加funDoCreate/funDoUpdate/funDoRetrieve/funDoDelete</div>
+            <div> 19. 函数参数活用？：</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin: 20px 0">
+        <div class="tittle">
+          <h2><span></span>单一职责规则</h2>
+        </div>
+        <div>
+          <h4>单一规则</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持每个文件只定义一样东西(例如服务或组件).</div>
+            <div>考虑把文件大小限制在 400 行代码以内.</div>
+          </div>
+        </div>
+        <div>
+          <h4>小函数</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持每个文件只定义一样东西(例如服务或组件).</div>
+            <div>考虑把文件大小限制在 400 行代码以内.</div>
+          </div>
+        </div>
+        <div class="tittle">
+          <h2><span></span>命名规则</h2>
+        </div>
+        <div>
+          <h4>总体命名原则</h4>
+        </div>
+
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持所有符号使用一致的命名规则.</div>
+            <div>坚持遵循同一个模式来描述符号的特性和类型。推荐的模式为feature.type.ts。</div>
+          </div>
+        </div>
+
+        <div>
+          <h4>使用点和横杠来分隔文件名</h4>
+        </div>
+
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持在描述性名字中，用横杠来分隔单词。</div>
+            <div>坚持使用点来分隔描述性名字和类型。</div>
+            <div>坚持遵循先描述组件特性，再描述它的类型的模式，对所有组件使用一致的类型命名规则。推荐的模式为feature.type.ts</div>
+            <div>坚持使用惯用的后缀来描述类型，包括*.service、*.component、*.pipe、.module、.directive。 必要时可以创建更多类型名，但必须注意，不要创建太多。</div>
+          </div>
+        </div>
+
+        <div>
+          <h4>符号名与文件名</h4>
+        </div>
+
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持为所有东西使用一致的命名约定，以它们所代表的东西命名。</div>
+            <div>坚持使用大写驼峰命名法来命名类。符号名匹配它所在的文件名。</div>
+            <div>坚持在符号名后面追加约定的类型后缀（例如Component、Directive、Module、Pipe、Service）。</div>
+            <div>坚持使用惯用的后缀来描述类型，包括*.service、*.component、*.pipe、.module、.directive。 必要时可以创建更多类型名，但必须注意，不要创建太多。</div>
+          </div>
+        </div>
+
+        <div>
+          <h4>服务名</h4>
+        </div>
+
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持使用一致的规则命名服务，以它们的特性来命名。</div>
+            <div>坚持为服务的类名加上Service后缀。 例如，获取数据或英雄列表的服务应该命名为DataService或HeroService。</div>
+          </div>
+        </div>
+
+        <div>
+          <h4>引导</h4>
+        </div>
+
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持把应用的引导程序和平台相关的逻辑放到名为main.ts的文件里。</div>
+            <div>坚持在引导逻辑中包含错误处理代码。</div>
+            <div>避免把应用逻辑放在main.ts中，而应放在组件或服务里。</div>
+            <div>目前已使用angular-cli自动生成目录结构。</div>
+          </div>
+        </div>
+
+        <div>
+          <h4>指令选择器</h4>
+        </div>
+
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持使用小驼峰命名法来命名指令的选择器。</div>
+          </div>
+        </div>
+
+        <div>
+          <h4>为组件添加自定义前缀</h4>
+        </div>
+
+
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持使用带连字符的小写元素选择器值（例如admin-users）。</div>
+            <div>坚持为组件选择器添加自定义前缀。 例如，toh前缀表示 Tour of Heroes（英雄指南），而前缀`admin表示管理特性区。</div>
+            <div>坚持使用前缀来识别特性区或者应用程序本身。</div>
+          </div>
+        </div>
+
+        <div>
+          <h4>为指令添加自定义前缀</h4>
+        </div>
+
+
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持为指令的选择器添加自定义前缀（例如前缀toh来自Tour of Heroes）。</div>
+            <div>坚持用小驼峰形式拼写非元素选择器，除非该选择器用于匹配原生 HTML 属性。</div>
+          </div>
+        </div>
+
+        <div>
+          <h4>管道名</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持为所有管道使用一致的命名约定，用它们的特性来命名。</div>
+          </div>
+        </div>
+
+        <div>
+          <h4>单元测试文件名</h4>
+        </div>
+
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持测试规格文件名与被测试组件文件名相同。</div>
+            <div>坚持测试规格文件名添加.spec后缀。</div>
+          </div>
+        </div>
+
+        <div>
+          <h4>端到端（E2E）测试的文件名</h4>
+        </div>
+
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持端到端测试规格文件和它们所测试的特性同名，添加.e2e-spec后缀。</div>
+          </div>
+        </div>
+
+        <div>
+          <h4>Angular NgModule 命名</h4>
+        </div>
+
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div>坚持为符号名添加Module后缀</div>
+            <div>坚持用特性名和所在目录命名模块。</div>
+            <div>坚持为文件名添加.module.ts扩展名。</div>
+            <div>坚持为 RoutingModule 类名添加RoutingModule后缀。</div>
+            <div>坚持为 RoutingModule 的文件名添加-routing.module.ts后缀。</div>
+          </div>
+        </div>
+
+        <div class="tittle">
+          <h2><span></span>编程约定</h2>
+        </div>
+        <div>
+          <h4>坚持一致的编程、命名和空格的约定。</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div><h4><span style="color: #1976d2">---</span>类<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持使用大写驼峰命名法来命名类。</div>
+            <div><h4><span style="color: #1976d2">---</span>常量<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持用const声明变量，除非它们的值在应用的生命周期内会发生变化。</div>
+            <div>考虑 把常量名拼写为小驼峰格式。</div>
+            <div>坚持容许现存的const常量沿用大写蛇形命名法。</div>
+            <div><h4><span style="color: #1976d2">---</span>接口<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持使用大写驼峰命名法来命名接口。</div>
+            <div>考虑不要在接口名字前面加I前缀。</div>
+            <div>考虑用类代替接口。</div>
+            <div><h4><span style="color: #1976d2">---</span>属性和方法<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持使用小写驼峰命名法来命名属性和方法。</div>
+            <div>避免为私有属性和方法添加下划线前缀。</div>
+            <div><h4><span style="color: #1976d2">---</span>导入语句中的空行<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持在第三方导入和应用导入之间留一个空行。</div>
+            <div>考虑按模块名字的字母顺排列导入行。</div>
+            <div>考虑在解构表达式中按字母顺序排列导入的东西。</div>
+            <div><h4><span style="color: #1976d2">---</span>应用程序结构与 Angular 模块<span style="color: #1976d2">---</span>
+            </h4></div>
+            <div>准备一个近期实施方案和一个长期的愿景。从零开始，但要考虑应用程序接下来的路往哪儿走。</div>
+            <div>所有应用程序的源代码都放到名叫src的目录里。 所有特性区都在自己的文件夹中，带有它们自己的 Angular 模块。</div>
+            <div>所有内容都遵循每个文件一个特性的原则。每个组件、服务和管道都在自己的文件里。 所有第三方程序包保存到其它目录里，而不是src目录。 你不会修改它们，所以不希望它们弄乱我们的应用程序。
+              使用本指南介绍的文件命名约定。
+            </div>
+            <div><h4><span style="color: #1976d2">---</span>LIFT<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持组织应用的结构，达到这些目的：快速定位 (Locate) 代码、一眼识别 (Identify) 代码、 尽量保持扁平结构 (Flattest) 和尝试 (Try) 遵循DRY (Do Not
+              Repeat Yourself, 不重复自己) 原则。
+            </div>
+            <div>坚持四项基本原则定义文件结构，上面的原则是按重要顺序排列的。</div>
+          </div>
+        </div>
+
+        <div>
+          <h4>目前使用angular-cli自动生成应用程序结构</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div><h4><span style="color: #1976d2">---</span>定位<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持直观、简单和快速地定位代码。</div>
+            <div><h4><span style="color: #1976d2">---</span>识别<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持命名文件到这个程度：看到名字立刻知道它包含了什么，代表了什么。</div>
+            <div>坚持文件名要具有说明性，确保文件中只包含一个组件。</div>
+            <div>避免创建包含多个组件、服务或者混合体的文件。</div>
+            <div><h4><span style="color: #1976d2">---</span>扁平<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持尽可能保持扁平的目录结构。</div>
+            <div>考虑当同一目录下达到 7 个或更多个文件时创建子目录。</div>
+            <div>考虑配置 IDE，以隐藏无关的文件，例如生成出来的.js文件和.js.map文件等。</div>
+            <div><h4><span style="color: #1976d2">---</span>T-DRY（尽量不重复自己）<span style="color: #1976d2">---</span></h4>
+            </div>
+            <div>避免过度 DRY，以致牺牲了阅读性。</div>
+            <div><h4><span style="color: #1976d2">---</span>总体结构的指导原则<span style="color: #1976d2">---</span></h4></div>
+            <div>目前使用angular-cli自动生成应用程序结构（.ts、.html、.css和.spec）</div>
+            <div><h4><span style="color: #1976d2">---</span>按特性组织的目录结构<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持根据特性区命名目录。</div>
+            <div><h4><span style="color: #1976d2">---</span>应用的根模块<span style="color: #1976d2">---</span></h4></div>
+            <div>angular-cli 脚手架自动生成Angular 根模块（例如/src/app），名为app.module.ts</div>
+            <div><h4><span style="color: #1976d2">---</span>特性模块<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持为应用中每个明显的特性创建一个 Angular 模块。</div>
+            <div>坚持把特性模块放在与特性区同名的目录中（例如app/heroes）。</div>
+            <div>坚持特性模块的文件名应该能反映出特性区的名字和目录（例如app/heroes/heroes.module.ts）。</div>
+            <div>坚持特性模块的符号名应该能反映出特性区、目录和文件名（例如在app/heroes/heroes.module.ts中定义HeroesModule）。</div>
+            <div><h4><span style="color: #1976d2">---</span>共享特性模块<span style="color: #1976d2">---</span></h4></div>
+            <div>在public目录中目前存放共享服务，组件，指令等。</div>
+            <div>在public中声明那些可能被特性模块引用的可复用组件、指令和管道。</div>
+            <div><h4><span style="color: #1976d2">---</span>核心特性模块<span style="color: #1976d2">---</span></h4></div>
+            <div>考虑把那些数量庞大、辅助性的、只用一次的类收集到核心模块中，让特性模块的结构更清晰简明。</div>
+            <div>把那些“只用一次”的类收集到CoreModule中，并对外隐藏它们的实现细节。简化的AppModule会导入CoreModule，并且把它作为整个应用的总指挥。</div>
+            <div>在core目录下创建一个名叫CoreModule的特性模块（例如在app/core/core.module.ts中定义CoreModule）。</div>
+            <div>把要共享给整个应用的单例服务放进CoreModule中（例如ExceptionService和LoggerService）。</div>
+            <div>坚持导入CoreModule中的资产所需要的全部模块（例如CommonModule和FormsModule）。</div>
+            <div><h4><span style="color: #1976d2">---</span>防止多次导入CoreModule<span style="color: #1976d2">---</span></h4>
+            </div>
+            <div>应该只有AppModule才允许导入CoreModule。</div>
+            <div>坚持防范多次导入CoreModule，并通过添加守卫逻辑来尽快失败。</div>
+            <div><h4><span style="color: #1976d2">---</span>惰性加载的目录<span style="color: #1976d2">---</span></h4></div>
+            <div>某些边界清晰的应用特性或工作流可以做成惰性加载或按需加载的，而不用总是随着应用启动。</div>
+            <div>坚持把惰性加载特性下的内容放进惰性加载目录中。 典型的惰性加载目录包含路由组件及其子组件以及与它们有关的那些资产和模块。</div>
+          </div>
+        </div>
+
+        <div class="tittle">
+          <h2><span></span>组件</h2>
+        </div>
+
+        <div>
+          <h4>组件相关规范</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div><h4><span style="color: #1976d2">---</span>组件选择器命名<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持使用中线 (dashed) 命名法或烤串 (kebab) 命名法来命名组件中的元素选择器。</div>
+            <div><h4><span style="color: #1976d2">---</span>把组件当做元素<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持给组件一个元素选择器，而不是属性或类选择器。</div>
+            <div><h4><span style="color: #1976d2">---</span>把模板和样式提取到它们自己的文件<span style="color: #1976d2">---</span></h4>
+            </div>
+            <div>坚持当超过 3 行时，把模板和样式提取到一个单独的文件。</div>
+            <div>坚持把模板文件命名为[component-name].component.html，其中，[component-name] 是组件名。</div>
+            <div>坚持把样式文件命名为[component-name].component.css，其中，[component-name] 是组件名。</div>
+            <div>坚持指定相对于模块的 URL ，给它加上./前缀。</div>
+            <div><h4><span style="color: #1976d2">---</span>内联输入和输出属性装饰器<span style="color: #1976d2">---</span></h4>
+            </div>
+            <div>坚持使用@Input()和@Output()，而非@Directive和@Component装饰器的inputs和outputs属性:</div>
+            <div>坚持把@Input()或者@Output()放到所装饰的属性的同一行。</div>
+            <div><h4><span style="color: #1976d2">---</span>避免为输入和输出属性指定别名<span style="color: #1976d2">---</span></h4>
+            </div>
+            <div>避免除非有重要目的，否则不要为输入和输出指定别名。</div>
+            <div><h4><span style="color: #1976d2">---</span>成员顺序<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持把属性成员放在前面，方法成员放在后面。</div>
+            <div>坚持先放公共成员，再放私有成员，并按照字母顺序排列。</div>
+            <div><h4><span style="color: #1976d2">---</span>把逻辑放到服务里<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持在组件中只包含与视图相关的逻辑。所有其它逻辑都应该放到服务中。</div>
+            <div>坚持把可重用的逻辑放到服务中，保持组件简单，聚焦于它们预期目的。</div>
+            <div><h4><span style="color: #1976d2">---</span>不要给输出属性加前缀<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持命名事件时，不要带前缀on。</div>
+            <div>坚持把事件处理器方法命名为on前缀之后紧跟着事件名。</div>
+            <div><h4><span style="color: #1976d2">---</span>把表现层逻辑放到组件类里<span style="color: #1976d2">---</span></h4>
+            </div>
+            <div>坚持把表现层逻辑放进组件类中，而不要放在模板里。</div>
+          </div>
+        </div>
+        <div class="tittle">
+          <h2><span></span>指令</h2>
+        </div>
+
+        <div>
+          <h4>指令相关规范</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div><h4><span style="color: #1976d2">---</span>使用指令来增强已有元素<span style="color: #1976d2">---</span></h4>
+            </div>
+            <div>坚持当你需要有表现层逻辑，但没有模板时，使用属性型指令。</div>
+            <div><h4><span style="color: #1976d2">---</span>HostListener 和 HostBinding 装饰器 vs. 组件元数据 host<span
+              style="color: #1976d2">---</span></h4>
+            </div>
+            <div>考虑优先使用@HostListener和@HostBinding，而不是@Directive和@Component装饰器的host属性。</div>
+            <div>坚持让你的选择保持一致。</div>
+          </div>
+        </div>
+        <div class="tittle">
+          <h2><span></span>服务</h2>
+        </div>
+        <div>
+          <h4>服务相关规范</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div><h4><span style="color: #1976d2">---</span>服务总是单例的<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持在同一个注入器内，把服务当做单例使用。用它们来共享数据和功能。</div>
+            <div><h4><span style="color: #1976d2">---</span>单一职责<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持创建单一职责的服务，用职责封装在它的上下文中。</div>
+            <div>坚持当服务成长到超出单一用途时，创建一个新服务。</div>
+            <div><h4><span style="color: #1976d2">---</span>提供一个服务<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持将服务提供到共享范围内的顶级组件的 Angular 注入器。</div>
+            <div><h4><span style="color: #1976d2">---</span>使用 @Injectable() 类装饰器<span style="color: #1976d2">---</span>
+            </h4></div>
+            <div>坚持当使用类型作为令牌来注入服务的依赖时，使用@Injectable()类装饰器，而非@Inject()参数装饰器。</div>
+          </div>
+        </div>
+
+        <div class="tittle">
+          <h2><span></span>数据服务</h2>
+        </div>
+        <div>
+          <h4>数据服务相关规范</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div><h4><span style="color: #1976d2">---</span>通过服务与 Web 服务器通讯<span style="color: #1976d2">---</span></h4>
+            </div>
+            <div>坚持把数据操作和与数据交互的逻辑重构到服务里。</div>
+            <div>坚持让数据服务来负责 XHR 调用、本地储存、内存储存或者其它数据操作。</div>
+          </div>
+        </div>
+        <div class="tittle">
+          <h2><span></span>生命周期钩子</h2>
+        </div>
+        <div>
+          <h4>生命周期钩子相关规范</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 5px">
+            <div><h4><span style="color: #1976d2">---</span>实现生命周期钩子接口<span style="color: #1976d2">---</span></h4></div>
+            <div>坚持实现生命周期钩子接口。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nz-content>

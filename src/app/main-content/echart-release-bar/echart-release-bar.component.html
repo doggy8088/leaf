@@ -1,0 +1,237 @@
+<nz-content>
+  <div style="line-height: 30px;margin: 10px;border-left: 2px #ccc solid;border-top: 2px #ccc solid">
+    <div style="margin: 20px;">
+      <div style="margin: 5px;">
+      <span style="font-size: 20px;font-weight: 400;">
+        <h2>{{tittle}}</h2>
+      </span>
+      </div>
+      <div>
+        <span>通过纵向柱状的方式去显示数据内容。</span>
+      </div>
+      <div style="margin: 20px 0">
+        <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
+          <div class="tittle">
+            <h3><span></span>柱状图基础设置</h3>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>获取数据的URL字段名称</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="releaseBarUrlName" name="releaseBarUrlName"
+                        nzPlaceHolder="后端获取数据的URL字段名称">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>后端获取数据的URL地址</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="releaseBarUrl" name="releaseBarUrl"
+                          nzPlaceHolder="后端获取数据的URL地址">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>图表距离左端的距离</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="releaseBarLeft" name="releaseBarLeft"
+                        nzPlaceHolder="图表距离左端的距离(样例:3%)">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>图表距离顶部的距离</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="releaseBarTop" name="releaseBarTop"
+                          nzPlaceHolder="图表距离顶端的距离(样例:3%)">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>柱子的颜色</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="releaseBarColor" name="releaseBarColor"
+                        nzPlaceHolder="柱子的颜色(样例:#ccc)">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>坐标轴指示器的类型</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8">
+                <nz-select
+                  [nzMode]="'tag'"
+                  [nzPlaceHolder]="'坐标轴指示器的类型'"
+                  [(ngModel)]="releaseBarShow"
+                  [nzNotFoundContent]="'无'"
+                  [nzFilter]="true"
+                  formControlName='releaseBarShow'>
+                  <nz-option nzValue="line" nzLabel="线条"></nz-option>
+                  <nz-option nzValue="shadow" nzLabel="阴影"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>X轴的数据类型</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8">
+              <nz-select
+                [nzMode]="'tag'"
+                [nzPlaceHolder]="'X轴的数据类型'"
+                [(ngModel)]="releaseBarXAxisDataType"
+                [nzNotFoundContent]="'无'"
+                [nzFilter]="true"
+                formControlName='releaseBarXAxisDataType'>
+                <nz-option nzValue="value" nzLabel="数值轴，适用于连续数据。"></nz-option>
+                <nz-option nzValue="category" nzLabel="类目轴，适用于离散的类目数据。"></nz-option>
+                <nz-option nzValue="time" nzLabel="时间轴，适用于连续的时序数据"></nz-option>
+                <nz-option nzValue="log" nzLabel="对数轴。适用于对数数据。"></nz-option>
+              </nz-select>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>Y轴的数据类型</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8">
+                <nz-select
+                  [nzMode]="'tag'"
+                  [nzPlaceHolder]="'Y轴的数据类型'"
+                  [(ngModel)]="releaseBarYAxisDataType"
+                  [nzNotFoundContent]="'无'"
+                  [nzFilter]="true"
+                  formControlName='releaseBarYAxisDataType'>
+                  <nz-option nzValue="value" nzLabel="数值轴，适用于连续数据。"></nz-option>
+                  <nz-option nzValue="category" nzLabel="类目轴，适用于离散的类目数据。"></nz-option>
+                  <nz-option nzValue="time" nzLabel="时间轴，适用于连续的时序数据"></nz-option>
+                  <nz-option nzValue="log" nzLabel="对数轴。适用于对数数据。"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>柱子的宽度</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="releaseBarWidth" name="releaseBarWidth"
+                        nzPlaceHolder="柱状图柱子的宽度">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>提示框显示的文字</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="releaseBarFont" name="releaseBarFont"
+                          nzPlaceHolder="提示框显示的文字信息">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+
+          <p>{{validateForm.value | json}}</p>
+        </form>
+        <div>
+          <h4>HTML文件</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            &lt;div echarts [options]="optionReleaseBar"&gt;&lt;/div&gt;
+          </div>
+        </div>
+        <div>
+          <h4>TS文件</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            /***成员变量***/<br/>
+
+            optionReleaseBar: any;<br/>
+            <span>{{validateForm.get('releaseBarUrlName').value}}</span> = '<span>{{validateForm.get('releaseBarUrl').value}}</span>';
+            <br/>
+            releaseBarLeft = '<span>{{validateForm.get('releaseBarLeft').value}}</span>';<br/>
+            releaseBarTop = '<span>{{validateForm.get('releaseBarTop').value}}</span>';<br/>
+            releaseBarColor = '<span>{{validateForm.get('releaseBarColor').value}}</span>';<br/>
+            releaseBarShow = '<span>{{validateForm.get('releaseBarShow').value}}</span>';<br/>
+            releaseBarXAxisDataType = '<span>{{validateForm.get('releaseBarXAxisDataType').value}}</span>';<br/>
+            releaseBarYAxisDataType = '<span>{{validateForm.get('releaseBarYAxisDataType').value}}</span>';<br/>
+            releaseBarWidth = '<span>{{validateForm.get('releaseBarWidth').value}}</span>';<br/>
+            releaseBarFont = '<span>{{validateForm.get('releaseBarFont').value}}</span>';<br/>
+            releaseBarXData = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];<br/>
+            releaseBarYData = [10, 52, 200, 334, 390, 330, 220];<br/>
+            <br/>
+
+            /***函数***/<br/>
+            getReleaseBarOption() {{'{'}}<br/>
+            this.httpService._get().subscribe(res => {{'{'}}<br/>
+            res.Xdata = this.releaseBarXData;<br/>
+            res.Ydata = this.releaseBarYData;<br/>
+            this.optionReleaseBar = {{'{'}}<br/>
+            color: [this.releaseBarColor],<br/>
+            tooltip: {{'{'}}<br/>
+            trigger: 'axis',<br/>
+            axisPointer: {{'{'}} // 坐标轴指示器，坐标轴触发有效<br/>
+            type: this.releaseBarShow // 默认为直线，可选为：'line' | 'shadow'<br/>
+            {{'}'}}<br/>
+            {{'}'}},<br/>
+            grid: {{'{'}}<br/>
+            left: this.releaseBarLeft,<br/>
+            right: '4%',<br/>
+            bottom: this.releaseBarTop,<br/>
+            containLabel: true<br/>
+            {{'}'}},<br/>
+            xAxis: [<br/>
+            {{'{'}}<br/>
+            type: this.releaseBarXAxisDataType,<br/>
+            data: this.releaseBarXData,<br/>
+            axisTick: {{'{'}}<br/>
+            alignWithLabel: true<br/>
+            {{'}'}}<br/>
+            {{'}'}}<br/>
+            ],<br/>
+            yAxis: [<br/>
+            {{'{'}}<br/>
+            type: this.releaseBarYAxisDataType,<br/>
+            {{'}'}}<br/>
+            ],<br/>
+            series: [<br/>
+            {{'{'}}<br/>
+            name: this.releaseBarFont,<br/>
+            type: 'bar',<br/>
+            barWidth: this.releaseBarWidth,<br/>
+            data: this.releaseBarYData,<br/>
+            {{'}'}}<br/>
+            ]<br/>
+            {{'}'}};<br/>
+            {{'}'}});<br/>
+            {{'}'}}<br/>
+          </div>
+        </div>
+        <div>
+          <h4>Demo演示</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            <div echarts [options]="optionReleaseBar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nz-content>

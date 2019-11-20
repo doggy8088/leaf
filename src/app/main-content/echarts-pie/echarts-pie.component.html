@@ -1,0 +1,344 @@
+<nz-content>
+  <div style="line-height: 30px;margin: 10px;border-left: 2px #ccc solid;border-top: 2px #ccc solid">
+    <div style="margin: 20px;">
+      <div style="margin: 5px;">
+      <span style="font-size: 20px;font-weight: 400;">
+        <h2>{{tittle}}</h2>
+      </span>
+      </div>
+      <div>
+        <span>通过饼状图去显示数据内容。</span>
+      </div>
+      <div style="margin: 20px 0">
+        <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
+          <div class="tittle">
+            <h3><span></span>饼状图基础设置</h3>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>获取数据的URL字段</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="pieUrlName" name="pieUrlName"
+                        nzPlaceHolder="UrlName">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item-required>获取数据URL地址</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="pieUrl" name="pieUrl"
+                          nzPlaceHolder="URL地址">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item-required>数据列表名称</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="pieDataLists" name="pieDataLists"
+                        nzPlaceHolder="数据来源数组">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>提示框浮层内容格式</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="pieFormatter" name="pieFormatter"
+                          nzPlaceHolder="a:系列名 b：数据项 c:数据值 d:所占比例">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>提示框背景色</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="pieFormatterBgColor"
+                        name="pieFormatterBgColor" nzPlaceHolder="提示框背景色">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>提示框内容字体颜色</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="pieFormatterTextColor"
+                          name="pieFormatterTextColor" nzPlaceHolder="提示框内容字体颜色">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>提示框内容字体大小</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="pieFormatterTextSize"
+                        name="pieFormatterTextSize" nzPlaceHolder="提示框内容字体大小">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>图例列表的布局朝向</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-select
+                  [nzPlaceHolder]="'图例列表的布局朝向'"
+                  [(ngModel)]="pieOrient"
+                  formControlName='pieOrient'>
+                  <nz-option nzValue="horizontal" nzLabel="水平方向"></nz-option>
+                  <nz-option nzValue="vertical" nzLabel="垂直方向"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>图标系列名称</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="pieSeriesName" name="pieSeriesName"
+                        nzPlaceHolder="seriesName">
+              </nz-input>
+            </div>
+            <div nz-form-item>
+              <div nz-form-label nz-col [nzSpan]="3">
+                <label nz-form-item>饼图的半径</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+                <nz-input [nzSize]="'default'" nzType="text" formControlName="pieSeriesRadius" name="pieSeriesRadius"
+                          nzPlaceHolder="饼图的半径，数组的第一项是内半径，第二项是外半径">
+                </nz-input>
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label nz-form-item>饼图的中心（圆心）坐标</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="8" nzHasFeedback>
+              <nz-input [nzSize]="'default'" nzType="text" formControlName="pieCenter" name="pieCenter"
+                        nzPlaceHolder="饼图的中心（圆心）坐标">
+              </nz-input>
+            </div>
+          </div>
+        </form>
+        <div class="tittle">
+          <h3><span></span>代码生成</h3>
+        </div>
+        <div>
+          <h4>HTML文件代码</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            &lt;div echarts [options]="option"&gt;&lt;/div&gt;<br/>
+            &lt;nz-modal [(nzVisible)]="isVisible" [nzTitle]="'选择颜色'" [nzContent]="modalContent"
+            (nzOnCancel)="handleModalCancel()"<br/>
+            (nzOnOk)="handleModalOk()"&gt;<br/>
+            &lt;ng-template #modalContent&gt;<br/>
+            &lt;div class="chooseColorArea"&gt;<br/>
+            &lt;div *ngFor="let colors of colorLibrary;"<br/>
+            [class.borderStyle]="colors.flag"<br/>
+            class="chooseColorBlock"&gt;<br/>
+            &lt;div (click)="chooseColor(colors)" [style.backgroundColor]="colors.color"<br/>
+            style="height: 40px;width: 40px;"&gt;&lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;/ng-template&gt;<br/>
+            &lt;/nz-modal&gt;<br/>
+          </div>
+        </div>
+        <div>
+          <h4>Less文件代码</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            .borderStyle{{'{'}}<br/>
+            border: 1px red solid;<br/>
+            {{'}'}}}<br/>
+            .chooseColorArea{{'{'}}<br/>
+            height: 300px;<br/>
+            width: 500px;<br/>
+            display: flex;<br/>
+            flex-wrap: wrap<br/>
+            {{'}'}}<br/>
+            .chooseColorBlock{{'{'}}<br/>
+            background-color: white;<br/>
+            padding: 4px;<br/>
+            height: 50px;<br/>
+            width: 50px;<br/>
+            margin: 20px<br/>
+            {{'}'}}<br/>
+          </div>
+        </div>
+        <div>
+          <h4>TS文件代码</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            <div>/***成员变量***/</div>
+            <div>private <span>{{validateForm.get('pieUrlName').value}}</span> = <span>'{{validateForm.get('pieUrl').value}}'</span>;
+            </div>
+            <div>public option;</div>
+            <div>private <span>{{validateForm.get('pieDataLists').value}}</span> = [];</div>
+            <div>private _formatter = '<span>{{validateForm.get('pieFormatter').value}}</span>';</div>
+            <div>private _backgroundColor = '<span>{{validateForm.get('pieFormatterBgColor').value}}</span>';</div>
+            <div>private _textColor = '<span>{{validateForm.get('pieFormatterTextColor').value}}</span>';</div>
+            <div>private _textFontSize = <span>{{validateForm.get('pieFormatterTextSize').value}}</span>;</div>
+            <div>private _orient = '<span>{{validateForm.get('pieOrient').value}}</span>';</div>
+            <div>private _legendDate = []; // 取值</div>
+            <div>private _seriesName = '<span>{{validateForm.get('pieSeriesName').value}}</span>';</div>
+            <div>private _seriesRadius = '<span>{{validateForm.get('pieSeriesRadius').value}}</span>';</div>
+            <div>private _seriesCenter = '<span>{{validateForm.get('pieCenter').value}}</span>';</div>
+            <div>private _seriesDate: PieModelDate[] = []; // 取值</div>
+            <div>/***函数***/</div>
+
+            <div> getOptionDate() {{'{'}}<br/>
+              this.http._get(this.Url).subscribe(res => {{'{'}}<br/>
+              if (res) {{'{'}}<br/>
+              res = this.<span>{{validateForm.get('pieDataLists').value}}</span>;<br/>
+              this._legendDate = this.<span>{{validateForm.get('pieDataLists').value}}</span>.name;<br/>
+              const colorList = ['#FFCCCC', '#99CCCC', '#99CCFF', '#CCCCFF', '#9cc5b0'];<br/>
+              const date = this.<span>{{validateForm.get('pieDataLists').value}}</span>.data;<br/>
+              const _seriesDate = [];<br/>
+              date.forEach(d => {{'{'}}<br/>
+              const obj = {{'{'}}<br/>
+              name: d.name,<br/>
+              value: d.value,<br/>
+              itemStyle: {{'{'}}<br/>
+              normal: {{'{'}}<br/>
+              color: '',<br/>
+              {{'}'}}<br/>
+              {{'}'}}<br/>
+              {{'}'}};<br/>
+              _seriesDate.push(obj);<br/>
+              {{'}'}});<br/>
+              colorList.forEach((color, j) => {{'{'}}<br/>
+              if (_seriesDate[j]) {{'{'}}<br/>
+              _seriesDate[j].itemStyle.normal.color = colorList[j];<br/>
+              {{'}'}}<br/>
+              {{'}'}});<br/>
+              this._seriesDate = _seriesDate;<br/>
+              this.getOption();<br/>
+              {{'}'}}<br/>
+              {{'}'}});<br/>
+              {{'}'}}<br/>
+            </div>
+            getOption() {{'{'}}<br/>
+            this.option = {{'{'}}<br/>
+            tooltip: {{'{'}} // 提示框浮层<br/>
+            trigger: 'item',<br/>
+            formatter: this._formatter, // 提示框浮层内容格式器<br/>
+            backgroundColor: this._backgroundColor, // 提示框背景色<br/>
+            textStyle: {{'{'}}<br/>
+            color: this._textColor, // 提示框内容字体颜色<br/>
+            fontSize: this._textFontSize, // 字体大小<br/>
+            {{'}'}},<br/>
+            {{'}'}},<br/>
+            legend: {{'{'}}// 图例<br/>
+            orient: this._orient, // 图例列表的布局朝向。<br/>
+            left: 'left', // 图例组件离容器左侧的距离。<br/>
+            top: '10%', // 图例组件离容器上面的距离。<br/>
+            data: this._legendDate // 图例数据<br/>
+            {{'}'}},<br/>
+            series: [<br/>
+            {{'{'}}<br/>
+            name: this._seriesName, // 系列名称<br/>
+            type: 'pie', // 饼图<br/>
+            radius: this._seriesRadius, // 饼图的半径，数组的第一项是内半径，第二项是外半径<br/>
+            center: this._seriesCenter, // 饼图的中心（圆心）坐标<br/>
+            data: this._seriesDate, // 数据<br/>
+            itemStyle: {{'{'}}<br/>
+            emphasis: {{'{'}}<br/>
+            shadowBlur: 10,<br/>
+            shadowOffsetX: 0,<br/>
+            shadowColor: 'rgba(0, 0, 0, 0.5)'<br/>
+            {{'}'}}<br/>
+            {{'}'}}<br/>
+            {{'}'}}<br/>
+            ]<br/>
+            {{'}'}};<br/>
+            {{'}'}}<br/>
+
+            handClick() {{'{'}}<br/>
+            this.isVisible = true;<br/>
+            {{'}'}}<br/>
+
+            handleModalCancel() {{'{'}}<br/>
+            this.isVisible = false;<br/>
+            {{'}'}}<br/>
+
+            handleModalOk() {{'{'}}<br/>
+            this.colorList = this.colorLists;<br/>
+            this.isVisible = false;<br/>
+            this.getOptionDate();<br/>
+            {{'}'}}<br/>
+
+            chooseColor(item) {{'{'}}<br/>
+            if (item.flag === false) {{'{'}}<br/>
+            item.flag = true;<br/>
+            this.colorLists.push(item);<br/>
+            {{'}'}} else {{'{'}}<br/>
+            item.flag = false;<br/>
+            this.colorLists.forEach((opt, j) => {{'{'}}<br/>
+            if (opt.key === item.key) {{'{'}}<br/>
+            this.colorLists.splice(j, 1);<br/>
+            {{'}'}}<br/>
+            {{'}'}});<br/>
+            {{'}'}}<br/>
+            {{'}'}}<br/>
+            <div>
+
+              /***model***/<br/>
+              <div><br/>
+                export class PieModelDate {{'{'}}<br/>
+                name: string;<br/>
+                value: number;<br/>
+                itemStyle: {{'{'}}<br/>
+                normal: {{'{'}}<br/>
+                color: string;<br/>
+                {{'}'}}<br/>
+                {{'}'}};<br/>
+                {{'}'}}<br/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4>Demo演示</h4>
+        </div>
+        <div style="border: #48c2a5 1px solid">
+          <div style="margin-left: 15px;">
+            <div style="font-size: 15px;" (click)="handClick()"><span>
+              <i class="fa fa-paint-brush" aria-hidden="true"></i>更改颜色</span>
+            </div>
+            <div echarts [options]="option"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="'选择颜色'" [nzContent]="modalContent" (nzOnCancel)="handleModalCancel()"
+            (nzOnOk)="handleModalOk()">
+    <ng-template #modalContent>
+      <div class="chooseColorArea">
+        <div *ngFor="let colors of colorLibrary;"
+             [class.borderStyle]="colors.flag"
+             class="chooseColorBlock">
+          <div (click)="chooseColor(colors)" [style.backgroundColor]="colors.color"
+               style="height: 40px;width: 40px;"></div>
+        </div>
+      </div>
+    </ng-template>
+  </nz-modal>
+</nz-content>
+
+
+

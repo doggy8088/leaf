@@ -1,0 +1,87 @@
+@import "../../public/css/public";
+
+.search {
+  display: inline-block;
+  margin-left: 2px;
+
+  nz-input {
+    width: 280px;
+    height: 34px;
+    color: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+  }
+}
+
+.toolsbar {
+  margin: 10px 0;
+}
+
+nz-table {
+  thead {
+    tr {
+      line-height: 35px;
+      height: 35px;
+
+      th {
+        background: #f8f8f9;
+        padding: 0px 8px;
+
+        &:first-child {
+          //padding-left: 50px;
+        }
+        &:last-child {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      height: 35px;
+      line-height: 1;
+
+      td {
+        padding: 0 8px;
+
+        &:first-child {
+          //padding-left: 50px;
+        }
+        &:last-child {
+          text-align: center;
+        }
+
+        a {
+          color: #0085d0;
+          opacity: 0.8;
+          margin-right: 10px;
+        }
+
+        //操作button
+        button {
+          border: 0px;
+          color: #0085d0;
+          opacity: 0.8;
+          cursor: pointer;
+          background: transparent;
+          width: auto;
+          height: 12px;
+          font-size: 12px;
+          padding: 0px 10px;
+          border-right: 1px solid #b2b2b2;
+          border-radius: 0px;
+          text-align: center;
+          margin-left: -12px;
+
+          &:last-child {
+            border: 0px;
+          }
+        }
+        button.disabledBtn {
+          color: rgb(187, 190, 196);
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
